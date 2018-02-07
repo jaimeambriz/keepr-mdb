@@ -10,45 +10,45 @@
                 <!-- DRAW THE VAULTS -->
                 <div class="column">
                     <div class="thumbnail" v-for="vault in vaults[0]">
-                        <router-link :to="'/vaults/'+vault.id">
+                        <router-link :to="'/vaults/'+vault._id">
                             <img :src="vault.imageUrl" alt="image" style="width:100%">
                         </router-link>
                         <div class="caption">
                             <p>{{vault.name}}</p>
-                            <i class="fa fa-trash" @click="deleteVault(vault.id)"></i>
+                            <i class="fa fa-trash" @click="deleteVault(vault._id)"></i>
                         </div>
                     </div>
                 </div>
                 <div class="column">
                     <div class="thumbnail" v-for="vault in vaults[1]">
-                        <router-link :to="'/vaults/'+vault.id">
+                        <router-link :to="'/vaults/'+vault._id">
                             <img :src="vault.imageUrl" alt="image" style="width:100%">
                         </router-link>
                         <div class="caption">
                             <p>{{vault.name}}</p>
-                            <i class="fa fa-trash" @click="deleteVault(vault.id)"></i>
+                            <i class="fa fa-trash" @click="deleteVault(vault._id)"></i>
                         </div>
                     </div>
                 </div>
                 <div v-if="vaults.length > 2" class="column">
                     <div class="thumbnail" v-for="vault in vaults[2]">
-                        <router-link :to="'/vaults/'+vault.id">
+                        <router-link :to="'/vaults/'+vault._id">
                             <img :src="vault.imageUrl" alt="image" style="width:100%">
                         </router-link>
                         <div class="caption">
                             <p>{{vault.name}}</p>
-                            <i class="fa fa-trash" @click="deleteVault(vault.id)"></i>
+                            <i class="fa fa-trash" @click="deleteVault(vault._id)"></i>
                         </div>
                     </div>
                 </div>
                 <div v-if="vaults.length > 2" class="column">
                     <div class="thumbnail" v-for="vault in vaults[3]">
-                        <router-link :to="'/vaults/'+vault.id">
+                        <router-link :to="'/vaults/'+vault._id">
                             <img :src="vault.imageUrl" alt="image" style="width:100%">
                         </router-link>
                         <div class="caption">
                             <p>{{vault.name}}</p>
-                            <i class="fa fa-trash" @click="deleteVault(vault.id)"></i>
+                            <i class="fa fa-trash" @click="deleteVault(vault._id)"></i>
                         </div>
                     </div>
                 </div>

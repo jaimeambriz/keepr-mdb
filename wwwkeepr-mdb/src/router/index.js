@@ -53,7 +53,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.state.user.id) {
+    if (store.state.user._id) {
       redirect: to.fullPath
       next()
     }

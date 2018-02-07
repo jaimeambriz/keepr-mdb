@@ -9,9 +9,9 @@ var schema = new mongoose.Schema({
 	imageUrl: { type: String, required: true },
 	views: { type: Number, default: 0 },
 	saveCount: { type: Number, default: 0 },
-	isPublic: { type: Boolean, required: true },
+	isPublic: { type: Boolean, required: true, default:true },
 	// Relations
-	vaultId: [{ type: ObjectId, ref: models.Vault }],
+	vaultId: [{ type: ObjectId, ref: models.Vault, unique: true, dropDups: true }],
 	creatorId: { type: ObjectId, ref: models.user.name, required: true }
 });
 

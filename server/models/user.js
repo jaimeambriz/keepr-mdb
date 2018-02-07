@@ -5,8 +5,9 @@ let bcrypt = require('bcryptjs')
 const SALT_FACTOR = 10
 
 let schema = new Schema({
-  name: { type: String, required: true },
+  username: { type: String, required: true },
   email: { type: String, required: true, unique: true, dropDups: true },
+  avatar:{ type: String, default:"https://s3.amazonaws.com/37assets/svn/765-default-avatar.png"},
   password: { type: String, required: true },
   created: { type: Number, required: true, default: Date.now() }
 })

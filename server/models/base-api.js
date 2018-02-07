@@ -60,18 +60,29 @@ function API(model, schema) {
   function update(req, res, next) {
     var action = actions.update
     var id = req.params.id || req.query.id || '';
-
     if (!id) {
       return next(handleResponse(action, null, { error: { message: 'Invalid request no id provided' } }))
     }
+    if (req.body.removeVaultId || req.body.addVaultId) {
+      (req.body.addVaultId ? schema.findOneAndUpdate({ _id: id }, { $push: { vaultId: req.body.addVaultId } }, req.body) :
+        schema.findOneAndUpdate({ _id: id }, { $pull: { vaultId: req.body.removeVaultId } }, req.body))
+        .then(data => {
+          return res.send(handleResponse(action, { message: 'Successfully updated' }))
+        })
+        .catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
+    else {
+      schema.findOneAndUpdate({ _id: id }, req.body)
+        .then(data => {
+          return res.send(handleResponse(action, { message: 'Successfully updated' }))
+        })
+        .catch(error => {
+          return next(handleResponse(action, null, error))
+        })
+    }
 
-    schema.findOneAndUpdate({ _id: id }, req.body)
-      .then(data => {
-        return res.send(handleResponse(action, { message: 'Successfully updated' }))
-      })
-      .catch(error => {
-        return next(handleResponse(action, null, error))
-      })
   }
 
   function remove(req, res, next) {

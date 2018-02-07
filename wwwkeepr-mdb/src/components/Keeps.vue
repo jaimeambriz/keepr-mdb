@@ -14,8 +14,8 @@
                             <p>{{keep.name}}</p>
                             <div class="buttons">
                                 <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
-                                <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.count}}</i>
-                                <i class="fa fa-trash" @click="deleteKeep(keep.id)"></i>
+                                <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
+                                <i class="fa fa-trash" @click="deleteKeep(keep._id)"></i>
                             </div>
                         </div>
                     </div>
@@ -27,8 +27,8 @@
                             <p>{{keep.name}}</p>
                             <div class="buttons">
                                 <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
-                                <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.count}}</i>
-                                <i class="fa fa-trash" @click="deleteKeep(keep.id)"></i>
+                                <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
+                                <i class="fa fa-trash" @click="deleteKeep(keep._id)"></i>
                             </div>
                         </div>
                     </div>
@@ -40,8 +40,8 @@
                             <p>{{keep.name}}</p>
                             <div class="buttons">
                                 <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
-                                <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.count}}</i>
-                                <i class="fa fa-trash" @click="deleteKeep(keep.id)"></i>
+                                <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
+                                <i class="fa fa-trash" @click="deleteKeep(keep._id)"></i>
                             </div>
                         </div>
                     </div>
@@ -53,8 +53,8 @@
                             <p>{{keep.name}}</p>
                             <div class="buttons">
                                 <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
-                                <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.count}}</i>
-                                <i class="fa fa-trash" @click="deleteKeep(keep.id)"></i>
+                                <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
+                                <i class="fa fa-trash" @click="deleteKeep(keep._id)"></i>
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                                             <label for="vault options">Select Vault</label>
                                             <select class="form-control text-center" v-model="addKeep">
                                                 <option class="col-sm-12" disabled>Vaults</option>
-                                                <option class="col-sm-12" v-for="vault in vaults" selected :value="vault.id">{{vault.name}}</option>
+                                                <option class="col-sm-12" v-for="vault in vaults" selected :value="vault._id">{{vault.name}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -142,17 +142,12 @@
                     keep: {
                         name: "",
                         imageUrl: "",
-                        views: 0,
-                        count: 0,
-                        userId: 0,
-                        likes: 0
+                       
                     },
                     addKeep: {
                         vaultId: "",
                         keepId: "",
-                        userId: 0
                     },
-                    fourCol: true,
                 }
             },
             components: {
@@ -185,10 +180,6 @@
                     this.keep = {
                         name: "",
                         imageUrl: "",
-                        views: 0,
-                        count: 0,
-                        userId: 0,
-                        likes: 0
                     }
                 },
                 openImageModal(keep) {
@@ -201,17 +192,20 @@
                     this.$store.dispatch('updateKeep', keep)
                 },
                 addKeepToVault(vaultId) {
-                    var addKeep = {
-                        keepId: this.activeKeep.id,
-                        vaultId: vaultId,
-                        userId: 0
+                    var activeKeep = this.activeKeep
+                    if (!activeKeep.vaultId.includes(vaultId)){
+                        var addKeep = {
+                            keepId: activeKeep._id,
+                            addVaultId: vaultId,
+                        }
+                        this.incrementCount()
+                        this.$store.dispatch("addKeepToVault", addKeep)
                     }
-                    this.incrementCount()
-                    this.$store.dispatch("addKeepToVault", addKeep)
+                    return
                 },
                 incrementCount() {
                     var keep = this.$store.state.activeKeep
-                    keep.count++
+                    keep.saveCount++
                     this.$store.dispatch("updateKeep", keep)
     
                 },

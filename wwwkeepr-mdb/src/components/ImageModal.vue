@@ -1,7 +1,7 @@
 <template>
         <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
+            <div class="modal-dialog" style="position: absolute; top:30px;left:23vw;">
+                <div class="modal-content" style="height:auto; min-width:160%">
                     <!-- *********** Modal Header *********** -->
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">
@@ -15,11 +15,11 @@
                     <!-- *********** Modal Body *********** -->
                     <div class="modal-body">
                         <div class="thumbnail keep-content">
-                            <img :src="activeKeep.imageUrl" alt="image" class="image" style="height:500px; width:auto">
+                            <img :src="activeKeep.imageUrl" alt="image" class="image" >
                             <div class="overlay">
                                 <div class="hover-buttons">
                                     <i class="fa fa-eye"> {{activeKeep.views}}</i>
-                                        <i class="fa fa-code-fork" @click="OpenAddKeepToVaultModal"> {{activeKeep.count}}</i>
+                                        <i class="fa fa-code-fork" @click="OpenAddKeepToVaultModal"> {{activeKeep.savecount}}</i>
                                     <i class="fa fa-share"></i> (coming soon)
                                 </div>
                             </div>

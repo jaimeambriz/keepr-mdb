@@ -1,8 +1,6 @@
 var Users = require('../models/user')
 var Vaults = require( '../models/vault')
-// var Tasks = require('../models/task')
 var Keeps = require('../models/keep')
-// var Comments = require('../models/comment')
 
 
 

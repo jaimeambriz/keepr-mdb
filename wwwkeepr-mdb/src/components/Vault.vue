@@ -8,8 +8,8 @@
                         <div class="caption">
                             <p>{{keep.name}}</p>
                             <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
-                            <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.count}}</i>
-                            <i class="fa fa-trash" @click="removeKeepFromVault(keep.id)"></i>
+                            <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
+                            <i class="fa fa-trash" @click="removeKeepFromVault(keep._id)"></i>
                         </div>
                     </div>
                 </div>
@@ -19,8 +19,8 @@
                         <div class="caption">
                             <p>{{keep.name}}</p>
                             <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
-                            <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.count}}</i>
-                            <i class="fa fa-trash" @click="removeKeepFromVault(keep.id)"></i>
+                            <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
+                            <i class="fa fa-trash" @click="removeKeepFromVault(keep._id)"></i>
                         </div>
                     </div>
                 </div>
@@ -30,8 +30,8 @@
                         <div class="caption">
                             <p>{{keep.name}}</p>
                             <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
-                            <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.count}}</i>
-                            <i class="fa fa-trash" @click="removeKeepFromVault(keep.id)"></i>
+                            <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
+                            <i class="fa fa-trash" @click="removeKeepFromVault(keep._id)"></i>
                         </div>
                     </div>
                 </div>
@@ -41,8 +41,8 @@
                         <div class="caption">
                             <p>{{keep.name}}</p>
                             <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
-                            <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.count}}</i>
-                            <i class="fa fa-trash" @click="removeKeepFromVault(keep.id)"></i>
+                            <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
+                            <i class="fa fa-trash" @click="removeKeepFromVault(keep._id)"></i>
                         </div>
                     </div>
                 </div>
@@ -58,9 +58,6 @@
                     keep: {
                         name: "",
                         imageUrl: "",
-                        views: 0,
-                        count: 0,
-                        userId: 0
                     }
                 }
             },
@@ -82,7 +79,7 @@
             },
             methods: {
                 removeKeepFromVault(keepId) {
-                    this.$store.dispatch('removeKeepFromVault', { vaultId: this.$route.params.id, keepId: keepId })
+                    this.$store.dispatch('removeKeepFromVault', { removeVaultId: this.$route.params.id, keepId: keepId })
                 }
     
             }

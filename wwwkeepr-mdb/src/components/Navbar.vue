@@ -16,7 +16,7 @@
                             </router-link>
                         </li>
                         <li class="navbar-vaults">
-                            <!-- ********** POUSH TO VAULTS ********** -->
+                            <!-- ********** PUSH TO VAULTS ********** -->
                             <router-link to="/vaults">
                                 <i class="fa fa-microchip fa-lg"></i> Vaults
                             </router-link>
@@ -35,15 +35,15 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li v-if="!user.id" class="navbar-email" data-toggle="modal" data-target="#register">
+                        <li v-if="!user._id" class="navbar-email" data-toggle="modal" data-target="#register">
                             <a href="#">
                                 <i class="fa fa-send"></i> Register</a>
                         </li>
-                        <li v-if="!user.id" class="navbar-login" data-toggle="modal" data-target="#login">
+                        <li v-if="!user._id" class="navbar-login" data-toggle="modal" data-target="#login">
                             <a href="#">
                                 <i class="fa fa-sign-in"></i> Login</a>
                         </li>
-                        <li v-else="user.id" class="navbar-logout">
+                        <li v-else="user._id" class="navbar-logout">
                             <a href="#" @click="logout">
                                 <i class="fa fa-sign-out"></i> Logout</a>
                         </li>
