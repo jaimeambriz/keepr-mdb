@@ -10,29 +10,29 @@
                     </div>
                     <ul class="nav navbar-nav">
                         <!-- ********** PUSH HOME ********** -->
-                        <li class="navbar-home">
+                        <li v-if="user._id" class="navbar-home">
                             <router-link to="/">
-                                <i class="fa fa-home fa-lg"></i> Home
+                                <i class="fa fa-search fa-lg"></i> Explore
                             </router-link>
                         </li>
-                        <li class="navbar-vaults">
+                        <li v-if="user._id" class="navbar-vaults">
                             <!-- ********** PUSH TO VAULTS ********** -->
                             <router-link to="/vaults">
                                 <i class="fa fa-microchip fa-lg"></i> Vaults
                             </router-link>
                         </li>
-                        <li class="navbar-keeps">
+                        <li v-if="user._id"class="navbar-keeps">
                             <!-- ********** PUSH TO KEEPS ********** -->
                             <router-link to="/keeps">
                                 <i class="fa fa-thumb-tack fa-lg"></i> Keeps
                             </router-link>
                         </li>
-                        <li class="navbar-toggle">
+                        <!-- <li class="navbar-toggle">
                             <label class="switch">
                                 <input type="checkbox">
                                 <span class="slider round"></span>
                             </label>
-                        </li>
+                        </li> -->
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li v-if="!user._id" class="navbar-email" data-toggle="modal" data-target="#register">

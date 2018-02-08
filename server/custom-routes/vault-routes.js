@@ -38,32 +38,32 @@ module.exports = {
                 })
         }
     },
-    getTasksByListId: {
-        path: '/boards/:boardId/lists/:listId/tasks',
-        reqType: 'get',
-        method(req, res, next) {
-            let action = 'Find Tasks By ListId'
-            Tasks.find({ listId: req.params.listId })
-                .then(tasks => {
-                    res.send(handleResponse(action, tasks))
-                }).catch(error => {
-                    return next(handleResponse(action, null, error))
-                })
-        }
-    },
-    getCommentsByTaskId: {
-        path: '/boards/:boardId/lists/:listId/tasks/:taskId/comments',
-        reqType: 'get',
-        method(req, res, next) {
-            let action = 'Find Comments By TaskId'
-            Comments.find({ taskId: req.params.taskId })
-                .then(comments => {
-                    res.send(handleResponse(action, comments))
-                }).catch(error => {
-                    return next(handleResponse(action, null, error))
-                })
-        }
-    }
+    // getTasksByListId: {
+    //     path: '/boards/:boardId/lists/:listId/tasks',
+    //     reqType: 'get',
+    //     method(req, res, next) {
+    //         let action = 'Find Tasks By ListId'
+    //         Tasks.find({ listId: req.params.listId })
+    //             .then(tasks => {
+    //                 res.send(handleResponse(action, tasks))
+    //             }).catch(error => {
+    //                 return next(handleResponse(action, null, error))
+    //             })
+    //     }
+    // },
+    // getCommentsByTaskId: {
+    //     path: '/boards/:boardId/lists/:listId/tasks/:taskId/comments',
+    //     reqType: 'get',
+    //     method(req, res, next) {
+    //         let action = 'Find Comments By TaskId'
+    //         Comments.find({ taskId: req.params.taskId })
+    //             .then(comments => {
+    //                 res.send(handleResponse(action, comments))
+    //             }).catch(error => {
+    //                 return next(handleResponse(action, null, error))
+    //             })
+    //     }
+    // }
 
 
 
