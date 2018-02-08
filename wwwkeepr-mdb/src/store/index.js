@@ -5,7 +5,7 @@ import router from '../router'
 import $ from 'jquery'
 import index from 'vue';
 
-let base = window.location.host.indexOf('localhost') > -1 ? '//localhost:3000/' : '/'
+let base = window.location.host.indexOf('localhost') > -1 ? '//localhost:3000/' : 'https://life-keepr.herokuapp.com/'
 
 let api = axios.create({
     baseURL: base + 'api/',
