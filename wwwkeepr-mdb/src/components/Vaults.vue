@@ -79,10 +79,6 @@
                                             v-model="vault.imageUrl" required/>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label">Description</label>
-                                        <input type="text" class="form-control" placeholder="Description" v-model="vault.description" required/>
-                                    </div>
-                                    <div class="form-group">
                                         <button @click="createVault" data-dismiss="modal" class="btn btn-default">Create</button>
                                     </div>
                                 </form>
@@ -142,6 +138,7 @@
     
     <!-- Add "scoped" attribute to limit CSS to this component only -->
     <style scoped>
+        .thumb
         .create-vault {
             color: white;
         }

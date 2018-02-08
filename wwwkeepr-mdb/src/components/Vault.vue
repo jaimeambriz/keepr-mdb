@@ -156,6 +156,11 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .thumbnail {
+        background-color: rgba(87, 87, 87, 0.5);
+    }
+    i, p{color: white;}
+
     .keeps {
         padding-top: 2rem;
 
