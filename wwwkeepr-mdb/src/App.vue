@@ -48,7 +48,7 @@
 
 <style>
   #app {
-    background: url("assets/gray-woodgrain.jpg") no-repeat fixed center;
+    background: url("https://png.pngtree.com/thumb_back/fw800/back_pic/03/83/12/2057c84e41d6b16.jpg") repeat center;
     /* background: rgb(206, 39, 39); */
     min-height: 100vh;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -57,9 +57,5 @@
     text-align: center;
     /* margin-top: 60px; */
   }
-  @media(max-width:640px) {
-    #app {
-      background: url("https://png.pngtree.com/thumb_back/fw800/back_pic/03/83/12/2057c84e41d6b16.jpg") repeat center
-    }
-}
+
 </style>
