@@ -19,7 +19,7 @@
                             <div class="overlay">
                                 <div class="hover-buttons">
                                     <i class="fa fa-eye"> {{activeKeep.views}}</i>
-                                        <i class="fa fa-code-fork" @click="OpenAddKeepToVaultModal"> {{activeKeep.saveCount}}</i>
+                                        <i v-if="user._id" class="fa fa-code-fork" @click="OpenAddKeepToVaultModal"> {{activeKeep.saveCount}}</i>
                                     <i class="fa fa-share"></i> (coming soon)
                                 </div>
                             </div>
