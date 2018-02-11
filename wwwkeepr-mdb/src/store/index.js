@@ -44,7 +44,7 @@ var store = new vuex.Store({
             state.vaults = payload
         },
         setUserKeeps(state, payload) {
-            console.log("setUserKeeps: ", payload)
+            // console.log("setUserKeeps: ", payload)
             state.userKeeps = payload
         },
         setActiveKeep(state, payload) {
@@ -69,32 +69,32 @@ var store = new vuex.Store({
             auth.post('accounts/login', payload)
                 .then(res => {
                     commit('setUser', res.data.data)
-                    console.log('Login: ', res)
+                    // console.log('Login: ', res)
                 })
                 .catch(err => {
-                    console.log('Error: ', err)
+                    // console.log('Error: ', err)
                 })
         },
         register({ commit, dispatch }, payload) {
             auth.post('accounts/register', payload)
                 .then(res => {
-                    console.log('Register: ', res)
+                    // console.log('Register: ', res)
                     commit('setUser', res.data.data)
                 })
                 .catch(err => {
-                    console.log('Error: ', err)
+                    // console.log('Error: ', err)
                 })
         },
         authenticate({ commit, dispatch }) {
             auth('authenticate')
                 .then(res => {
-                    console.log('authenticate: ', res)
+                    // console.log('authenticate: ', res)
                     if (res.data.data != "") {
                         commit('setUser', res.data.data)
                         dispatch('getAllKeeps')
                         dispatch('getVaults')
                         dispatch('getUserKeeps')
-                        router.push({ name: 'Home' })
+                        // router.push({ name: 'Home' })
                     }
                     else {
                         commit('setUser', {})
@@ -104,7 +104,7 @@ var store = new vuex.Store({
                     }
                 })
                 .catch(err => {
-                    console.log(err)
+                    // console.log(err)
                     commit('setUser', {})
                     dispatch('getAllKeeps')
                     router.push({ name: 'Home' })
@@ -127,39 +127,39 @@ var store = new vuex.Store({
                 .then(res => {
                     commit('setVaults', res.data.data)
                     dispatch('massageKeepData', { data: res.data.data, num: 2, set: "setActiveVaults" })
-                    console.log('Get Usesr Vaults: ', res)
+                    // console.log('Get Usesr Vaults: ', res)
                 })
                 .catch(err => {
-                    console.log('Error: ', err)
+                    // console.log('Error: ', err)
                 })
         },
         createVault({ commit, dispatch }, payload) {
             api.post('vaults', payload)
                 .then(res => {
-                    console.log('Create Vault ', res)
+                    // console.log('Create Vault ', res)
                     dispatch('getVaults')
                 })
                 .catch(err => {
-                    console.log('Error: ', err)
+                    // console.log('Error: ', err)
                 })
         },
         updateVault({ commit, dispatch }, payload) {
             api.put('vaults/' + payload.vaultId, payoald)
                 .then(res => {
-                    console.log('Update Vault ', res)
+                    // console.log('Update Vault ', res)
                 })
                 .catch(err => {
-                    console.log('Error: ', err)
+                    // console.log('Error: ', err)
                 })
         },
         deleteVault({ commit, dispatch }, payload) {
             api.delete('vaults/' + payload)
                 .then(res => {
-                    console.log('Delete Vault ', res)
+                    // console.log('Delete Vault ', res)
                     dispatch('getVaults')
                 })
                 .catch(err => {
-                    console.log('Error: ', err)
+                    // console.log('Error: ', err)
                 })
         },
         // ********** Keeps **********
@@ -172,10 +172,10 @@ var store = new vuex.Store({
             api('keeps')
                 .then(res => {
                     dispatch('massageKeepData', { data: res.data.data, num: num, set: "setKeeps" })
-                    console.log('Get Keeps: ', res.data.data)
+                    // console.log('Get Keeps: ', res.data.data)
                 })
                 .catch(err => {
-                    console.log('Error: ', err)
+                    // console.log('Error: ', err)
                 })
         },
         massageKeepData({ commit, dispatch }, payload) {
@@ -210,10 +210,10 @@ var store = new vuex.Store({
             api('userkeeps')
                 .then(res => {
                     dispatch('massageKeepData', { data: res.data.data, num: num, set: "setUserKeeps" })
-                    console.log('Get User Keeps: ', res)
+                    // console.log('Get User Keeps: ', res)
                 })
                 .catch(err => {
-                    console.log('Error: ', err)
+                    // console.log('Error: ', err)
                 })
         },
         getKeepsByVaultId({ commit, dispatch }, payload) {
@@ -223,11 +223,11 @@ var store = new vuex.Store({
             }
             api('vaults/' + payload + '/keeps/')
                 .then(res => {
-                    console.log('Get Keeps By ValutId: ', res)
+                    // console.log('Get Keeps By ValutId: ', res)
                     dispatch('massageKeepData', { data: res.data.data, num: num, set: "setActiveVaultKeeps" })
                 })
                 .catch(err => {
-                    console.log('Error: ', err)
+                    // console.log('Error: ', err)
                 })
         },
         setActiveKeep({ commit, diapatch }, payload) {
@@ -238,47 +238,47 @@ var store = new vuex.Store({
                 .then(res => {
                     dispatch('getAllKeeps')
                     dispatch('getUserKeeps')
-                    console.log('Create Keep: ', res)
+                    // console.log('Create Keep: ', res)
                 })
                 .catch(err => {
-                    console.log('Error: ', err)
+                    // console.log('Error: ', err)
                 })
         },
         addKeepToVault({ commit, dispatch }, payload) {
             api.put('keeps/' + payload.keepId , payload)
                 .then(res => {
-                    console.log('Added Keep To Vault: ', res)
+                    // console.log('Added Keep To Vault: ', res)
 
                 })
                 .catch(err => {
-                    console.log('Error: ', err)
+                    // console.log('Error: ', err)
                 })
         },
         removeKeepFromVault({ commit, dispatch }, payload) {
             api.put('keeps/' + payload.keepId, payload )
                 .then(res => {
-                    console.log('RemoveKeepFromVault: ', res.data)
+                    // console.log('RemoveKeepFromVault: ', res.data)
                     dispatch('getKeepsByVaultId', payload.removeVaultId)
                 })
         },
         updateKeep({ commit, dispatch }, payload) {
             api.put('keeps/' + payload._id, payload)
                 .then(res => {
-                    console.log('Update Keep: ', res)
+                    // console.log('Update Keep: ', res)
                 })
                 .catch(err => {
-                    console.log('Error: ', err)
+                    // console.log('Error: ', err)
                 })
         },
         deleteKeep({ commit, dispatch }, payload) {
             api.delete('keeps/' + payload)
                 .then(res => {
-                    console.log('Delete Keep: ', res)
+                    // console.log('Delete Keep: ', res)
                     dispatch('getUserKeeps')
                     dispatch('getAllKeeps')
                 })
                 .catch(err => {
-                    console.log('Error: ', err)
+                    // console.log('Error: ', err)
                 })
         },
 

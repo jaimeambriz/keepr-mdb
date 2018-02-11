@@ -23,11 +23,11 @@
     // ********** THIS IS TO CHECK THE WINDOW WIDTH **********
     created() {
       window.addEventListener('resize', this.getWindowWidth);
-      window.addEventListener('resize', this.getWindowHeight);
+      // window.addEventListener('resize', this.getWindowHeight);
     },
     destroyed() {
       window.removeEventListener('resize', this.getWindowWidth);
-      window.removeEventListener('resize', this.getWindowHeight);
+      // window.removeEventListener('resize', this.getWindowHeight);
     },
     mounted() {
       this.$store.dispatch('authenticate')
@@ -39,9 +39,9 @@
         console.log("windowWidth", this.windowWidth)
         this.$store.dispatch("windowWidth", this.windowWidth)
       },
-      getWindowHeight(event) {
-        this.windowHeight = document.documentElement.clientHeight;
-      }
+      // getWindowHeight(event) {
+      //   this.windowHeight = document.documentElement.clientHeight;
+      // }
     }
   }
 </script>
