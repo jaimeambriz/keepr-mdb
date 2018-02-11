@@ -107,11 +107,11 @@
             computed: {
                 vaults() {
                     // ********** COMMENT THIS OUT WHEN THE SERVER IS RUNNING **********
-                    var vaults = this.$store.state.activeVaults
-                    if (vaults.length == 2) {
-                        return vaults
-                    }
-                    this.$store.dispatch('massageKeepData', { data: vaults, num: 2, set: "setActiveVaults" })
+                    // var vaults = this.$store.state.activeVaults
+                    // if (vaults.length == 2) {
+                    //     return vaults
+                    // }
+                    // this.$store.dispatch('massageKeepData', { data: vaults, num: 2, set: "setActiveVaults" })
                     // ********** END **********
                     return this.$store.state.activeVaults
                 },
@@ -165,9 +165,6 @@
             z-index: 9999
         }
     
-        .vaults {
-            padding-top: 2rem;
-        }
     
         /* *********** COLUMN STYLING ********* */
     

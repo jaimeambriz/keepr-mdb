@@ -156,11 +156,11 @@
             computed: {
                 keeps() {
                     // ********** COMMENT THIS OUT WHEN THE SERVER IS RUNNING **********
-                    var keeps = this.$store.state.userKeeps
-                    if (keeps.length == 4) {
-                        return keeps
-                    }
-                    this.$store.dispatch('massageKeepData', { data: keeps, num: 4, set: "setUserKeeps" })
+                    // var keeps = this.$store.state.userKeeps
+                    // if (keeps.length == 4) {
+                    //     return keeps
+                    // }
+                    // this.$store.dispatch('massageKeepData', { data: keeps, num: 4, set: "setUserKeeps" })
                     // ********** END **********
                     return this.$store.state.userKeeps
                 },
@@ -247,10 +247,6 @@
     
         .create-keep {
             color: white;
-        }
-    
-        .keeps {
-            padding-top: 2rem;
         }
     
         .create-keep {

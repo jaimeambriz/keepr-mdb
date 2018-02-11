@@ -30,7 +30,8 @@ var store = new vuex.Store({
         activeVaults: [],
         activeKeeps: [],
         activeKeep: {},
-        error: {}
+        error: {},
+        windowWidth:0
     },
     mutations: {
         setUser(state, payload) {
@@ -54,9 +55,15 @@ var store = new vuex.Store({
         },
         setActiveVaults(state, payload) {
             state.activeVaults = payload
+        },
+        setWindowWidth(state, payload){
+            state.windowWidth = payload
         }
     },
     actions: {
+        windowWidth({ commit, dispath}, payload){
+            commit('setWindowWidth', payload)
+        },
         // ********** User **********
         login({ commit, dispatch }, payload) {
             auth.post('accounts/login', payload)
@@ -157,9 +164,14 @@ var store = new vuex.Store({
         },
         // ********** Keeps **********
         getAllKeeps({ commit, dispatch }) {
+            var num = 2
+            if (this.state.windowWidth > 640){
+                num = 4
+            }
+
             api('keeps')
                 .then(res => {
-                    dispatch('massageKeepData', { data: res.data.data, num: 4, set: "setKeeps" })
+                    dispatch('massageKeepData', { data: res.data.data, num: num, set: "setKeeps" })
                     console.log('Get Keeps: ', res.data.data)
                 })
                 .catch(err => {
@@ -191,9 +203,13 @@ var store = new vuex.Store({
             }
         },
         getUserKeeps({ commit, dispatch }) {
+            var num = 2
+            if (this.state.windowWidth > 640){
+                num = 4
+            }
             api('userkeeps')
                 .then(res => {
-                    dispatch('massageKeepData', { data: res.data.data, num: 4, set: "setUserKeeps" })
+                    dispatch('massageKeepData', { data: res.data.data, num: num, set: "setUserKeeps" })
                     console.log('Get User Keeps: ', res)
                 })
                 .catch(err => {
@@ -201,10 +217,14 @@ var store = new vuex.Store({
                 })
         },
         getKeepsByVaultId({ commit, dispatch }, payload) {
+            var num = 2
+            if (this.state.windowWidth > 640){
+                num = 4
+            }
             api('vaults/' + payload + '/keeps/')
                 .then(res => {
                     console.log('Get Keeps By ValutId: ', res)
-                    dispatch('massageKeepData', { data: res.data.data, num: 4, set: "setActiveVaultKeeps" })
+                    dispatch('massageKeepData', { data: res.data.data, num: num, set: "setActiveVaultKeeps" })
                 })
                 .catch(err => {
                     console.log('Error: ', err)

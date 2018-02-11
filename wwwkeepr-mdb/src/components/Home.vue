@@ -249,9 +249,6 @@
 
   /* *********** END HOVER ********** */
 
-  .home {
-    padding-top: 4rem;
-  }
 
   .row {
     display: -ms-flexbox;
