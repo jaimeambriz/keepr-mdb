@@ -57,4 +57,9 @@
     text-align: center;
     /* margin-top: 60px; */
   }
+  @media(max-width:640px) {
+    #app {
+      background: url("assets/gray-woodgrain.jpg") cover no-repeat center
+    }
+}
 </style>
