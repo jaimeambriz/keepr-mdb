@@ -59,7 +59,7 @@
   }
   @media(max-width:640px) {
     #app {
-      background: url("assets/gray-woodgrain.jpg") cover no-repeat center
+      background: url("https://wallpaper.wiki/wp-content/uploads/2017/05/HD-Wood-Grain-Pictures.jpg") repeat center
     }
 }
 </style>
