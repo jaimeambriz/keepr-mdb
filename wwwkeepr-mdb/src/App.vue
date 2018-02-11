@@ -59,7 +59,7 @@
   }
   @media(max-width:640px) {
     #app {
-      background: url("https://wallpaper.wiki/wp-content/uploads/2017/05/HD-Wood-Grain-Pictures.jpg") repeat center
+      background: url("https://png.pngtree.com/thumb_back/fw800/back_pic/03/83/12/2057c84e41d6b16.jpg") repeat center
     }
 }
 </style>
