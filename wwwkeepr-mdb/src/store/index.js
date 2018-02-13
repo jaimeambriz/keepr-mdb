@@ -88,7 +88,7 @@ var store = new vuex.Store({
         authenticate({ commit, dispatch }) {
             auth('authenticate')
                 .then(res => {
-                    // console.log('authenticate: ', res)
+                    console.log('authenticate')
                     if (res.data.data != "") {
                         commit('setUser', res.data.data)
                         dispatch('getAllKeeps')
@@ -99,12 +99,12 @@ var store = new vuex.Store({
                     else {
                         commit('setUser', {})
                         dispatch('getAllKeeps')
-                        dispatch('getVaults')
-                        dispatch('getUserKeeps')
+                        // dispatch('getVaults')
+                        // dispatch('getUserKeeps')
                     }
                 })
                 .catch(err => {
-                    // console.log(err)
+                    console.log(err)
                     commit('setUser', {})
                     dispatch('getAllKeeps')
                     router.push({ name: 'Home' })

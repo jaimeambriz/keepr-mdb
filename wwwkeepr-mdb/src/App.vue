@@ -22,6 +22,7 @@
     },
     // ********** THIS IS TO CHECK THE WINDOW WIDTH **********
     created() {
+      this.$store.dispatch('authenticate')
       window.addEventListener('resize', this.getWindowWidth);
       // window.addEventListener('resize', this.getWindowHeight);
     },
@@ -30,7 +31,6 @@
       // window.removeEventListener('resize', this.getWindowHeight);
     },
     mounted() {
-      this.$store.dispatch('authenticate')
       this.getWindowWidth(event)
     },
     methods: {
@@ -57,5 +57,4 @@
     text-align: center;
     /* margin-top: 60px; */
   }
-
 </style>

@@ -5,6 +5,11 @@
                     <i class="fa fa-picture-o fa-lg"></i> Create Keep
                 </h4>
             </div>
+            <!-- <div class="create-keep">
+                <h4 @click="openCloud">
+                    <i class="fa fa-picture-o fa-lg"></i> Create Keep
+                </h4>
+            </div> -->
             <div class="row">
                 <!-- ********** DRAW KEEPS ********** -->
                 <div class="column">
@@ -76,17 +81,16 @@
                             <!-- *********** Modal Body *********** -->
                             <div class="modal-body">
                                 <form class="form">
-                                    <div class="form-group">
-                                        <label class="control-label">Name</label>
+                                    <label class="control-label">Name</label>
+                                        <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Name" v-model="keep.name" required/>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Image</label>
-                                        <input type="url" class="form-control" placeholder="https://vignette.wikia.nocookie.net/simpsons/images/0/02/Homer_Simpson_2006.png/revision/latest?cb=20091207194310"
-                                            v-model="keep.imageUrl" required/>
+                                    <label class="control-label">Image</label>
+                                    <div class="image">
+                                        <img :src="keep.imageUrl" class="add-keep-image" @click="openCloudinary" v-model="keep.imageUrl" required/>
                                     </div>
                                     <div class="form-group">
-                                        <button @click="createKeep" data-dismiss="modal" class="btn btn-default">Create</button>
+                                        <button v-if="keep.name && keep.imageUrl != 'https://churchtraconline.com/articles/wp-content/uploads/2017/09/Antu_insert-image.svg_-846x846.png' " @click="createKeep" data-dismiss="modal" class="btn btn-success">Create</button>
                                     </div>
                                 </form>
                             </div>
@@ -141,7 +145,7 @@
                 return {
                     keep: {
                         name: "",
-                        imageUrl: "",
+                        imageUrl: "https://churchtraconline.com/articles/wp-content/uploads/2017/09/Antu_insert-image.svg_-846x846.png",
                        
                     },
                     addKeep: {
@@ -179,8 +183,14 @@
                     this.$store.dispatch('createKeep', this.keep)
                     this.keep = {
                         name: "",
-                        imageUrl: "",
+                        imageUrl: "https://churchtraconline.com/articles/wp-content/uploads/2017/09/Antu_insert-image.svg_-846x846.png",
                     }
+                },
+                openCloudinary(){
+                    cloudinary.openUploadWidget({ cloud_name: 'life-keepr', upload_preset: 'czqfqpq8' },
+                    (error, result) => {
+                        this.keep.imageUrl = result[0].secure_url
+                    });
                 },
                 openImageModal(keep) {
                     this.$store.dispatch('setActiveKeep', keep)
@@ -247,9 +257,6 @@
     
         .create-keep {
             color: white;
-        }
-    
-        .create-keep {
             cursor: pointer;
         }
     
@@ -346,7 +353,7 @@
     
         /* Style the buttons */
     
-        .btn {
+        /* .btn {
             border: none;
             outline: none;
             padding: 10px 16px;
@@ -362,5 +369,14 @@
         .btn.active {
             background-color: #666;
             color: white;
+        } */
+        /* ********** MODAL ********** */
+        .add-keep-image{
+            height: 200px;
+            width: auto;
         }
+        .image{
+            margin-bottom:10px;
+        }
+
     </style>

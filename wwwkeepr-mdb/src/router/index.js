@@ -8,6 +8,7 @@ import Vaults from '../components/Vaults'
 import Vault from '../components/Vault'
 import store from '../store'
 
+
 Vue.use(Router)
 // export default new Router({
 const router = new Router({
@@ -16,7 +17,7 @@ const router = new Router({
       path: '/',
       name: 'Home',
       component: Home,
-      
+
     },
     {
       path: '/keeps',
@@ -52,15 +53,32 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.state.user._id) {
-      redirect: to.fullPath
+  if (!store.state.user._id) {
+    setTimeout(function () {
+      if (to.matched.some(record => record.meta.requiresAuth)) {
+        console.log("store: ", store.state.user.name)
+        if (store.state.user._id) {
+          redirect: to.fullPath
+          next()
+        }
+      } else {
+        path: '/home';
+        redirect: to.path
+        next()
+      }
+    }, 500)
+  } else {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      console.log("store: ", store.state.user.name)
+      if (store.state.user._id) {
+        redirect: to.fullPath
+        next()
+      }
+    } else {
+      path: '/home';
+      redirect: to.path
       next()
     }
-  } else {
-    path: '/home';
-    redirect: to.path
-    next()
   }
 })
 
