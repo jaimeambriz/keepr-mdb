@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "jquery": "^3.2.1",
+    "sweetalert2": "^7.11.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-scroll-reveal": "^1.0.5",

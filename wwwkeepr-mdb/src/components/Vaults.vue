@@ -90,6 +90,7 @@
 </template>
 
 <script>
+    import swal from'sweetalert2'
     export default {
         name: 'Valuts',
         data() {
@@ -124,6 +125,13 @@
                     name: "",
                     imageUrl: "https://churchtraconline.com/articles/wp-content/uploads/2017/09/Antu_insert-image.svg_-846x846.png"
                 }
+                swal({
+                    position: 'center',
+                    type: 'success',
+                    title: 'You\'ve created a new Vault!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             },
             openCloudinary() {
                 cloudinary.openUploadWidget({ cloud_name: 'life-keepr', upload_preset: 'czqfqpq8' },
@@ -132,7 +140,38 @@
                     });
             },
             deleteVault(vaultId) {
-                this.$store.dispatch('deleteVault', vaultId)
+                swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    confirmButtonClass: 'btn btn-danger',
+                    cancelButtonClass: 'btn btn-success',
+                    buttonsStyling: false,
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        this.$store.dispatch('deleteVault', vaultId)
+                        swal(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    } else if (
+                        // Read more about handling dismissals
+                        result.dismiss === swal.DismissReason.cancel
+                    ) {
+                        swal(
+                            'Cancelled',
+                            'Your image file is safe :)',
+                            'error'
+                        )
+                    }
+                })
             }
         }
     }
