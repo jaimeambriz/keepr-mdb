@@ -1,106 +1,215 @@
 <template>
-        <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- *********** Modal Header *********** -->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <h4 class="modal-title">
-                            {{activeKeep.name}}
-                        </h4>
-                    </div>
-                    <!-- *********** Modal Body *********** -->
-                    <div class="modal-body">
-                        <div class="thumbnail keep-content">
-                            <img :src="activeKeep.imageUrl" alt="image" class="image" >
-                            <div class="overlay">
-                                <div class="hover-buttons">
-                                    <i class="fa fa-eye"> {{activeKeep.views}}</i>
-                                        <i v-if="user._id" class="fa fa-code-fork" @click="OpenAddKeepToVaultModal"> {{activeKeep.saveCount}}</i>
-                                    <i class="fa fa-share"></i> (coming soon)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- ********* IMAGE MODAL ******** -->
+    <div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- The Close Button -->
+            <span @click="close" class="close">&times;</span>
+
+            <!-- Modal Content (The Image) -->
+            <img class="modal-content" :src="activeKeep.imageUrl" id="img01">
+
+            <!-- Modal Caption (Image Text) -->
+            <div id="caption">
+                <h1>{{activeKeep.name}}</h1>
             </div>
         </div>
-    </template>
-    <script>
-        export default {
-            name: 'Modal',
-            data() {
-                return {
-    
-                }
+    </div>
+
+</template>
+<script>
+    export default {
+        name: 'Modal',
+        data() {
+            return {
+            }
+        },
+        components: {
+        },
+        computed: {
+            activeKeep() {
+                return this.$store.state.activeKeep
             },
-            components: {
-            },
-            computed: {
-                activeKeep() {
-                    return this.$store.state.activeKeep
-                },
-                user() {
-                    return this.$store.state.user
-                }
-            },
-            methods: {
-                createKeep() {
-                    this.$store.dispatch('createKeep', this.keep)
-                },
-                addKeepToVault(keep) {
-                    var test = this.newKeep
-                    var keep = keep
-                    $("#addKeep").modal('show')
-                },
-                OpenAddKeepToVaultModal() {
-                    $("#imageModal").modal('hide')
-                    $("#addKeep").modal('show')
-                },
+            user() {
+                return this.$store.state.user
+            }
+        },
+        methods: {
+            // ****** OLD METHODS ********
+            // createKeep() {
+            //     this.$store.dispatch('createKeep', this.keep)
+            // },
+            // addKeepToVault(keep) {
+            //     var test = this.newKeep
+            //     var keep = keep
+            //     $("#addKeep").modal('show')
+            // },
+            // OpenAddKeepToVaultModal() {
+            //     $("#imageModal").modal('hide')
+            //     $("#addKeep").modal('show')
+            // },
+            // ********* END *********
+            // When the user clicks on <span> (x), close the modal
+            close() {
+                $("#myModal").css({ display: "none" })
+                this.$store.dispatch('setActiveKeep',{})
+
             }
         }
-    </script>
-    <style scoped>
-       
-        .thumbnail {
-            max-height: 600Px;
-            position: relative;
-            width: 100%;
+    }
+</script>
+<style scoped>
+    /* ********** CSS FOR OLD MODAL ********** */
+
+    /* .thumbnail {
+        max-height: 600Px;
+        position: relative;
+        width: 100%;
+    }
+
+    .fa-code-fork {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .keep-content:hover .overlay {
+        opacity: .7;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: .5s ease;
+        background-color: #000000;
+    }
+
+    .hover-buttons {
+        top: 5%;
+        left: 50%;
+        position: absolute;
+        font-size: 20px;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+    } */
+
+    /* ********** END *********** */
+
+    /* Style the Image Used to Trigger the Modal */
+
+    #myImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #myImg:hover {
+        opacity: 0.7;
+    }
+
+    /* The Modal (background) */
+
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 2;
+        /* Sit on top */
+        padding-top: 50px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.9);
+        /* Black w/ opacity */
+    }
+
+    /* Modal Content (Image) */
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+    }
+
+    /* Caption of Modal Image (Image Text) - Same Width as the Image */
+
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 10vh;
+    }
+
+    /* Add Animation - Zoom in the Modal */
+
+    .modal-content,
+    #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+    @keyframes zoom {
+        from {
+            transform: scale(0)
         }
-    
-        .fa-code-fork {
-            margin-left: 20px;
-            margin-right: 20px;
+        to {
+            transform: scale(1)
         }
-    
-        .keep-content:hover .overlay {
-            opacity: .7;
+    }
+
+    /* The Close Button */
+
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    @keyframes zoomout {
+        from {
+            transform: scale(1)
         }
-    
-        .overlay {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            width: 100%;
-            opacity: 0;
-            transition: .5s ease;
-            background-color: #000000;
+        to {
+            transform: scale(0)
         }
-    
-        .hover-buttons {
-            top:5%;
-            left: 50%;
-            position: absolute;
-            font-size: 20px;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color:rgb(255, 255, 255);
-            cursor: pointer;
+    }
+
+    /* 100% Image Width on Smaller Screens */
+
+    @media only screen and (max-width: 800px) {
+        .modal-content {
+            width: 90%;
         }
-    </style>
+    }
+</style>

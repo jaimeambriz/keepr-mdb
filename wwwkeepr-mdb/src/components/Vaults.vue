@@ -1,11 +1,11 @@
 <template>
     <div class="vaults">
         <!-- CREATE VAULT BUTTON -->
-        <div class="create-vault">
+        <!-- <div class="create-vault">
             <h4 data-toggle="modal" data-target="#createVault">
                 <i class="fa fa-picture-o fa-lg"></i> Create Vault
             </h4>
-        </div>
+        </div> -->
         <div class="row">
             <!-- DRAW THE VAULTS -->
             <div class="column">
@@ -52,39 +52,7 @@
                     </div>
                 </div>
             </div>
-            <!--CREATE VAULT MODAL BEGIN -->
-            <div class="modal fade" id="createVault" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <!-- *********** Modal Header *********** -->
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
-                                <span aria-hidden="true">&times;</span>
-                                <span class="sr-only">Close</span>
-                            </button>
-                            <h4 class="modal-title">
-                                Create Vault
-                            </h4>
-                        </div>
-                        <!-- *********** Modal Body *********** -->
-                        <div class="modal-body">
-                            <form class="form">
-                                <div class="form-group">
-                                    <label class="control-label">Name</label>
-                                    <input type="text" class="form-control" placeholder="Name" v-model="vault.name" required/>
-                                </div>
-                                <label class="control-label">Image</label>
-                                <div class="image">
-                                    <img class="add-vault-image" :src="vault.imageUrl" @click="openCloudinary" v-model="vault.imageUrl" required/>
-                                </div>
-                                <div class="form-group">
-                                        <button v-if="vault.name && vault.imageUrl != 'https://churchtraconline.com/articles/wp-content/uploads/2017/09/Antu_insert-image.svg_-846x846.png' " @click="createVault" data-dismiss="modal" class="btn btn-success">Create</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+         
         </div>
     </div>
 </template>
@@ -95,10 +63,6 @@
         name: 'Valuts',
         data() {
             return {
-                vault: {
-                    name: "",
-                    imageUrl: "https://churchtraconline.com/articles/wp-content/uploads/2017/09/Antu_insert-image.svg_-846x846.png",
-                }
             }
         },
         components: {},
@@ -118,27 +82,7 @@
         mounted() {
             this.$store.dispatch('getVaults')
         },
-        methods: {
-            createVault() {
-                this.$store.dispatch("createVault", this.vault)
-                this.vault = {
-                    name: "",
-                    imageUrl: "https://churchtraconline.com/articles/wp-content/uploads/2017/09/Antu_insert-image.svg_-846x846.png"
-                }
-                swal({
-                    position: 'center',
-                    type: 'success',
-                    title: 'You\'ve created a new Vault!',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            },
-            openCloudinary() {
-                cloudinary.openUploadWidget({ cloud_name: 'life-keepr', upload_preset: 'czqfqpq8' },
-                    (error, result) => {
-                        this.vault.imageUrl = result[0].secure_url
-                    });
-            },
+        methods: {  
             deleteVault(vaultId) {
                 swal({
                     title: 'Are you sure?',
@@ -225,7 +169,7 @@
         -ms-flex-wrap: wrap;
         /* IE 10 */
         flex-wrap: wrap;
-        padding: 0 4px;
+        padding: 20px 4px;
     }
 
     /* Create two equal columns that sits next to each other */
@@ -240,16 +184,5 @@
     .column img {
         margin-top: 8px;
         vertical-align: middle;
-    }
-
-    /*********** VAULT MODAL **********/
-
-    .add-vault-image {
-        height: 200px;
-        width: auto;
-    }
-
-    .image {
-        margin-bottom: 10px;
     }
 </style>

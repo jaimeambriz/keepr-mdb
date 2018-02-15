@@ -4,8 +4,8 @@
       <!-- ********** BEGIN DRAWING THUMBNAILS ********* -->
       <div class="column">
         <div class="thumbnail animated zoomInDown" v-for="keep in keeps[0]">
-          <div v-scroll-reveal="{origin: 'bottom', distance: '300px',duration: 200, delay: 900}" class="scroll-reveal">
-            <img :src="keep.imageUrl" alt="image" @click="openImageModal(keep)" style="width:100%">
+          <div v-scroll-reveal="{origin: 'bottom', distance: '300px',duration: 200, delay: 200}" class="scroll-reveal">
+            <img :src="keep.imageUrl" :alt="keep.name" @click="openImageModal(keep)" style="width:100%">
             <div class="caption">
               <p>{{keep.name}}</p>
               <div class="buttons">
@@ -19,8 +19,8 @@
       </div>
       <div class="column">
         <div class="thumbnail animated zoomInDown" v-for="keep in keeps[1]">
-          <div v-scroll-reveal="{origin: 'bottom',  distance: '300px',duration: 200, delay: 500}" class="scroll-reveal">
-            <img :src="keep.imageUrl" alt="image" @click="openImageModal(keep)" style="width:100%">
+          <div v-scroll-reveal="{origin: 'bottom',  distance: '300px',duration: 200, delay: 200}" class="scroll-reveal">
+            <img :src="keep.imageUrl" :alt="keep.name"  @click="openImageModal(keep)" style="width:100%">
             <div class="caption">
               <p>{{keep.name}}</p>
               <div class="buttons">
@@ -43,8 +43,8 @@
       </div>
       <div v-if="keeps.length > 2" class="column">
         <div class="thumbnail animated zoomInDown" v-for="keep in keeps[2]">
-          <div v-scroll-reveal="{origin: 'bottom',  distance: '300px',duration: 200, delay: 800}" class="scroll-reveal">
-            <img :src="keep.imageUrl" alt="image" @click="openImageModal(keep)" style="width:100%">
+          <div v-scroll-reveal="{origin: 'bottom',  distance: '300px',duration: 200, delay: 300}" class="scroll-reveal">
+            <img :src="keep.imageUrl" :alt="keep.name"  @click="openImageModal(keep)" style="width:100%">
             <div class="caption">
               <p>{{keep.name}}</p>
               <div class="buttons">
@@ -58,8 +58,8 @@
       </div>
       <div v-if="keeps.length > 2" class="column">
         <div class="thumbnail animated zoomInDown" v-for="keep in keeps[3]">
-          <div v-scroll-reveal="{origin: 'bottom',  distance: '300px',duration: 200, delay: 600}" class="scroll-reveal">
-            <img :src="keep.imageUrl" alt="image" @click="openImageModal(keep)" style="width:100%">
+          <div v-scroll-reveal="{origin: 'bottom',  distance: '300px',duration: 200, delay: 400}" class="scroll-reveal">
+            <img :src="keep.imageUrl" :alt="keep.name"  @click="openImageModal(keep)" style="width:100%">
             <div class="caption">
               <p>{{keep.name}}</p>
               <div class="buttons">
@@ -168,7 +168,7 @@
     methods: {
       openImageModal(keep) {
         this.$store.dispatch('setActiveKeep', keep)
-        $("#imageModal").modal('show')
+        $("#myModal").css({ display: "block" });
         this.incrementViews(keep)
       },
       incrementViews(keep) {
@@ -255,7 +255,7 @@
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    padding: 0 4px;
+    padding: 20px 4px;
   }
 
   .fa-eye {

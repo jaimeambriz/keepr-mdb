@@ -1,10 +1,10 @@
 <template>
     <div class="keeps">
-        <div class="create-keep">
+        <!-- <div class="create-keep">
             <h4 data-toggle="modal" data-target="#createKeep">
                 <i class="fa fa-picture-o fa-lg"></i> Create Keep
             </h4>
-        </div>
+        </div> -->
         <!-- <div class="create-keep">
                 <h4 @click="openCloud">
                     <i class="fa fa-picture-o fa-lg"></i> Create Keep
@@ -64,40 +64,6 @@
                     </div>
                 </div>
             </div>
-            <!-- CREATE KEEP MODAL -->
-            <div class="modal fade" id="createKeep" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <!-- *********** Modal Header *********** -->
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
-                                <span aria-hidden="true">&times;</span>
-                                <span class="sr-only">Close</span>
-                            </button>
-                            <h4 class="modal-title">
-                                Create Keep
-                            </h4>
-                        </div>
-                        <!-- *********** Modal Body *********** -->
-                        <div class="modal-body">
-                            <form class="form">
-                                <label class="control-label">Name</label>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Name" v-model="keep.name" required/>
-                                </div>
-                                <label class="control-label">Image</label>
-                                <div class="image">
-                                    <img :src="keep.imageUrl" class="add-keep-image" @click="openCloudinary" v-model="keep.imageUrl" required/>
-                                </div>
-                                <div class="form-group">
-                                    <button v-if="keep.name && keep.imageUrl != 'https://churchtraconline.com/articles/wp-content/uploads/2017/09/Antu_insert-image.svg_-846x846.png' "
-                                        @click="createKeep" data-dismiss="modal" class="btn btn-success">Create</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- *********** ADD KEEP TO VAULT MODAL************ -->
             <div class="modal fade" id="addKeep" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
@@ -140,16 +106,10 @@
 
 <script>
     import ImageModal from "./imagemodal"
-    import swal from 'sweetalert2'
     export default {
         name: 'Keeps',
         data() {
             return {
-                keep: {
-                    name: "",
-                    imageUrl: "https://churchtraconline.com/articles/wp-content/uploads/2017/09/Antu_insert-image.svg_-846x846.png",
-
-                },
                 addKeep: {
                     vaultId: "",
                     keepId: "",
@@ -181,29 +141,9 @@
             this.$store.dispatch('getUserKeeps')
         },
         methods: {
-            createKeep() {
-                this.$store.dispatch('createKeep', this.keep)
-                this.keep = {
-                    name: "",
-                    imageUrl: "https://churchtraconline.com/articles/wp-content/uploads/2017/09/Antu_insert-image.svg_-846x846.png",
-                }
-                swal({
-                    position: 'center',
-                    type: 'success',
-                    title: 'You\'ve created a new Keep!',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            },
-            openCloudinary() {
-                cloudinary.openUploadWidget({ cloud_name: 'life-keepr', upload_preset: 'czqfqpq8' },
-                    (error, result) => {
-                        this.keep.imageUrl = result[0].secure_url
-                    });
-            },
             openImageModal(keep) {
                 this.$store.dispatch('setActiveKeep', keep)
-                $("#imageModal").modal('show')
+                $("#myModal").css({ display: "block" });
                 this.incrementViews(keep)
             },
             incrementViews(keep) {
@@ -374,7 +314,7 @@
         -ms-flex-wrap: wrap;
         /* IE 10 */
         flex-wrap: wrap;
-        padding: 0 4px;
+        padding: 20px 4px;
     }
 
     /* Create two equal columns that sits next to each other */
@@ -410,15 +350,4 @@
             background-color: #666;
             color: white;
         } */
-
-    /* ********** MODAL ********** */
-
-    .add-keep-image {
-        height: 200px;
-        width: auto;
-    }
-
-    .image {
-        margin-bottom: 10px;
-    }
 </style>

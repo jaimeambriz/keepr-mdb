@@ -56,7 +56,7 @@ router.beforeEach((to, from, next) => {
   if (!store.state.user._id) {
     setTimeout(function () {
       if (to.matched.some(record => record.meta.requiresAuth)) {
-        console.log("store: ", store.state.user.name)
+        // console.log("store: ", store.state.user.name)
         if (store.state.user._id) {
           redirect: to.fullPath
           next()
@@ -69,7 +69,7 @@ router.beforeEach((to, from, next) => {
     }, 500)
   } else {
     if (to.matched.some(record => record.meta.requiresAuth)) {
-      console.log("store: ", store.state.user.name)
+      // console.log("store: ", store.state.user.name)
       if (store.state.user._id) {
         redirect: to.fullPath
         next()
