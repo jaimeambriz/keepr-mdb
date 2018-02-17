@@ -19,10 +19,10 @@
                     <h1>{{vault.name}}</h1>
                 </router-link>
             </div>
-            <div class="delete col-xs-3">
-                <i class="fa fa-trash fa-3x" @click="deleteVault(vault._id)" ></i>
+            <div class="vault-delete col-xs-3">
+                <i class="vault-trash fa fa-trash fa-3x" @click="deleteVault(vault._id)" ></i>
                 <router-link :to="'/vaults/'+vault._id">
-                    <i class="fa fa-angle-right fa-4x"></i>
+                    <i class="vault-arrow fa fa-angle-right fa-4x"></i>
                 </router-link>
             </div>
 
@@ -214,13 +214,13 @@
 
     .vault-image,
     .vault-caption,
-    .delete {
+    .vault-delete {
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    .delete {
+    .vault-delete {
         justify-content: space-around;
     }
 

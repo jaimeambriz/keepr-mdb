@@ -47,6 +47,10 @@
           $('.vault-image').removeClass("col-xs-5").addClass("col-xs-3")
           $('.vault-caption').removeClass("col-xs-4").addClass("col-xs-6")
         }
+        if (this.windowWidth <= 400){
+          $('.vault-trash').removeClass("fa-3x")
+          $('.vault-arrow').removeClass("fa-4x")
+        }
       },
       // getWindowHeight(event) {
       //   this.windowHeight = document.documentElement.clientHeight;

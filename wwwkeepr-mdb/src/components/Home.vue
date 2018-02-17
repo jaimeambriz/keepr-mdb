@@ -310,9 +310,13 @@
     vertical-align: middle;
   }
 
-  /* ************** MEDIA WIDTH ***********  
-        @media (max-width: 1000px) { 
-        #photos { 
-        column-count: 3; } 
-        }  */
+  /* ************** MEDIA WIDTH ***********   */
+
+  @media (max-width: 400px) {
+    .column {
+      -ms-flex: 100%;
+    /* IE 10 */
+    flex: 100%;
+    }
+  }
 </style>
