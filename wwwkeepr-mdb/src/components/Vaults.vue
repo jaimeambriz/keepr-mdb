@@ -213,7 +213,7 @@
     }
 
     .vault-image,
-    .caption,
+    .vault-caption,
     .delete {
         display: flex;
         justify-content: center;
