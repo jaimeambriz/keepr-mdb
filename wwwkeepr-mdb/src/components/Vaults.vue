@@ -9,17 +9,17 @@
         <div class="row" v-for="vault in vaults">
             <!-- DRAW THE VAULTS -->
 
-            <div class="vault-image img-responsive col-xs-4">
+            <div class="vault-image img-responsive col-xs-4 col-md-3">
                 <router-link :to="'/vaults/'+vault._id">
                     <img :src="vault.imageUrl" class="pull-left" alt="image" style="width:100%">
                 </router-link>
             </div>
-            <div class="vault-caption col-xs-4" >
+            <div class="vault-caption col-xs-4 col-md-6" >
                 <router-link :to="'/vaults/'+vault._id">
                     <h1>{{vault.name}}</h1>
                 </router-link>
             </div>
-            <div class="vault-delete col-xs-4">
+            <div class="vault-delete col-xs-3 col-md-3">
                 <i class="vault-trash fa fa-trash fa-2x" @click="deleteVault(vault._id)" ></i>
                 <router-link :to="'/vaults/'+vault._id">
                     <i class="vault-arrow fa fa-angle-right fa-2x"></i>
