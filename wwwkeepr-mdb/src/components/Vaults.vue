@@ -14,7 +14,7 @@
                     <img :src="vault.imageUrl" class="pull-left" alt="image" style="width:100%">
                 </router-link>
             </div>
-            <div class="caption col-xs-6" >
+            <div class="vault-caption col-xs-6" >
                 <router-link :to="'/vaults/'+vault._id">
                     <h1>{{vault.name}}</h1>
                 </router-link>
