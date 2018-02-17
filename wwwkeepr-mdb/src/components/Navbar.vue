@@ -5,7 +5,7 @@
                 <div class="nav-bar">
                     <div class="nav-logo pull-left">
                         <router-link to="/">
-                            <img src="https://preview.ibb.co/jq2bbm/Keepr.png" alt="Keeper" height="50" width="50" style="display: inline-block">
+                            <img src="../assets/Keepr-logo.png" alt="Keeper" height="50" width="50" style="display: inline-block">
                         </router-link>
                     </div>
                     <div v-if="user._id" class="nav-explore pull-left nav-content">

@@ -280,7 +280,7 @@
 
     .vaultIn {
         animation-name: slideIn, fadeIn;
-        animation-duration: 0.5s;
+        animation-duration: 1s;
     }
 
     @keyframes slideIn {
