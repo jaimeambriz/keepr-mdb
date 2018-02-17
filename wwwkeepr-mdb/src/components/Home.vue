@@ -312,7 +312,7 @@
 
   /* ************** MEDIA WIDTH ***********   */
 
-  @media (max-width: 440px) {
+  @media (max-width: 420px) {
     .column {
       -ms-flex: 100%;
     /* IE 10 */

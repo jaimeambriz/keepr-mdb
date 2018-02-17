@@ -39,18 +39,18 @@
         console.log("windowWidth", this.windowWidth)
         this.$store.dispatch("windowWidth", this.windowWidth)
         // var x = window.matchMedia("(max-width: 450px)")
-        if (this.windowWidth <= 575) { // If media query matches
-          $('.vault-image').removeClass("col-xs-3").addClass("col-xs-4")
-          $('.vault-caption').removeClass("col-xs-5").addClass("col-xs-4")
-        }
-        if (this.windowWidth >= 576){
-          $('.vault-image').removeClass("col-xs-4").addClass("col-xs-3")
-          $('.vault-caption').removeClass("col-xs-4").addClass("col-xs-5")
-        }
-        if (this.windowWidth <= 450){
-          $('.vault-trash').removeClass("fa-3x")
-          $('.vault-arrow').removeClass("fa-4x")
-        }
+        // if (this.windowWidth <= 575) { // If media query matches
+        //   $('.vault-image').removeClass("col-xs-3").addClass("col-xs-4")
+        //   $('.vault-caption').removeClass("col-xs-5").addClass("col-xs-4")
+        // }
+        // if (this.windowWidth >= 576){
+        //   $('.vault-image').removeClass("col-xs-4").addClass("col-xs-3")
+        //   $('.vault-caption').removeClass("col-xs-4").addClass("col-xs-5")
+        // }
+        // if (this.windowWidth <= 450){
+        //   $('.vault-trash').removeClass("fa-3x")
+        //   $('.vault-arrow').removeClass("fa-4x")
+        // }
       },
       // getWindowHeight(event) {
       //   this.windowHeight = document.documentElement.clientHeight;
