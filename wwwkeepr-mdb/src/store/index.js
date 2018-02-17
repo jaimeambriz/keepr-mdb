@@ -28,10 +28,11 @@ var store = new vuex.Store({
         vaults: [],
         userKeeps: [],
         activeVaults: [],
+        activeVault: {},
         activeKeeps: [],
         activeKeep: {},
         error: {},
-        windowWidth:0
+        windowWidth: 0
     },
     mutations: {
         setUser(state, payload) {
@@ -56,12 +57,15 @@ var store = new vuex.Store({
         setActiveVaults(state, payload) {
             state.activeVaults = payload
         },
-        setWindowWidth(state, payload){
+        setActiveVault(state, payload) {
+            state.activeVault = payload
+        },
+        setWindowWidth(state, payload) {
             state.windowWidth = payload
         }
     },
     actions: {
-        windowWidth({ commit, dispath}, payload){
+        windowWidth({ commit, dispath }, payload) {
             commit('setWindowWidth', payload)
         },
         // ********** User **********
@@ -162,10 +166,22 @@ var store = new vuex.Store({
                     // console.log('Error: ', err)
                 })
         },
+        setActiveVault({ commit, dispatch }, payload) {
+            var vaults = store.state.vaults;
+            var activeVault = {}
+            for (var i = 0; i < vaults.length; i++) {
+                var vault = vaults[i]
+                if (vault._id == payload) {
+                     activeVault = vault
+                     break;
+                }
+            }
+            commit('setActiveVault', activeVault)
+        },
         // ********** Keeps **********
         getAllKeeps({ commit, dispatch }) {
             var num = 2
-            if (this.state.windowWidth > 640){
+            if (this.state.windowWidth > 640) {
                 num = 4
             }
 
@@ -204,7 +220,7 @@ var store = new vuex.Store({
         },
         getUserKeeps({ commit, dispatch }) {
             var num = 2
-            if (this.state.windowWidth > 640){
+            if (this.state.windowWidth > 640) {
                 num = 4
             }
             api('userkeeps')
@@ -218,7 +234,7 @@ var store = new vuex.Store({
         },
         getKeepsByVaultId({ commit, dispatch }, payload) {
             var num = 2
-            if (this.state.windowWidth > 640){
+            if (this.state.windowWidth > 640) {
                 num = 4
             }
             api('vaults/' + payload + '/keeps/')
@@ -245,7 +261,7 @@ var store = new vuex.Store({
                 })
         },
         addKeepToVault({ commit, dispatch }, payload) {
-            api.put('keeps/' + payload.keepId , payload)
+            api.put('keeps/' + payload.keepId, payload)
                 .then(res => {
                     // console.log('Added Keep To Vault: ', res)
 
@@ -255,7 +271,7 @@ var store = new vuex.Store({
                 })
         },
         removeKeepFromVault({ commit, dispatch }, payload) {
-            api.put('keeps/' + payload.keepId, payload )
+            api.put('keeps/' + payload.keepId, payload)
                 .then(res => {
                     // console.log('RemoveKeepFromVault: ', res.data)
                     dispatch('getKeepsByVaultId', payload.removeVaultId)

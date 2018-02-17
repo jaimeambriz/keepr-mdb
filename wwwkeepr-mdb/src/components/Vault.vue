@@ -1,5 +1,9 @@
 <template>
-    <div class="vault">
+    <div class="vaultIn">
+        <!-- <router-link to="/vaults">
+            <img src="../assets/BackButton.png" class="pull-left" height="40" width="50" style="display: inline-block" alt="Back button">
+        </router-link> -->
+        <h1 style="color:white;margin-bottom: 0">{{vault.name}}</h1>
         <div class="row">
             <!-- ********** DRAW KEEPS ********** -->
             <div class="column">
@@ -7,9 +11,11 @@
                     <img :src="keep.imageUrl" @click="openImageModal(keep)" alt="image" style="width:100%">
                     <div class="caption">
                         <p>{{keep.name}}</p>
-                        <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
-                        <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
-                        <i class="fa fa-trash" @click="removeKeepFromVault(keep._id)"></i>
+                        <div class="buttons">
+                            <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
+                            <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
+                            <i class="fa fa-trash" @click="removeKeep(keep._id)"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -18,9 +24,11 @@
                     <img :src="keep.imageUrl" @click="openImageModal(keep)" alt="image" style="width:100%">
                     <div class="caption">
                         <p>{{keep.name}}</p>
-                        <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
-                        <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
-                        <i class="fa fa-trash" @click="removeKeepFromVault(keep._id)"></i>
+                        <div class="buttons">
+                            <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
+                            <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
+                            <i class="fa fa-trash" @click="removeKeep(keep._id)"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -29,9 +37,11 @@
                     <img :src="keep.imageUrl" @click="openImageModal(keep)" alt="image" style="width:100%">
                     <div class="caption">
                         <p>{{keep.name}}</p>
-                        <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
-                        <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
-                        <i class="fa fa-trash" @click="removeKeepFromVault(keep._id)"></i>
+                        <div class="buttons">
+                            <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
+                            <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
+                            <i class="fa fa-trash" @click="removeKeep(keep._id)"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -40,9 +50,11 @@
                     <img :src="keep.imageUrl" @click="openImageModal(keep)" alt="image" style="width:100%">
                     <div class="caption">
                         <p>{{keep.name}}</p>
-                        <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
-                        <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
-                        <i class="fa fa-trash" @click="removeKeepFromVault(keep._id)"></i>
+                        <div class="buttons">
+                            <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
+                            <i class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
+                            <i class="fa fa-trash" @click="removeKeep(keep._id)"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,6 +98,7 @@
 </template>
 
 <script>
+    import swal from 'sweetalert2'
     import ImageModal from './imagemodal'
     export default {
         name: 'Vault',
@@ -121,17 +134,56 @@
             vaults() {
                 return this.$store.state.vaults
             },
+            vault() {
+                return this.$store.state.activeVault
+            },
+
         },
-        mounted() {
+        beforeMount() {
             this.$store.dispatch('getKeepsByVaultId', this.$route.params.id)
+            this.$store.dispatch('setActiveVault', this.$route.params.id)
         },
         methods: {
-            removeKeepFromVault(keepId) {
-                this.$store.dispatch('removeKeepFromVault', { removeVaultId: this.$route.params.id, keepId: keepId })
+            removeKeep(keepId) {
+                swal({
+                    title: 'Are you sure?',
+                    text: "This keep will be removed!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, remove it!',
+                    cancelButtonText: 'No, cancel!',
+                    confirmButtonClass: 'btn btn-danger',
+                    cancelButtonClass: 'btn btn-success',
+                    buttonsStyling: false,
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        this.$store.dispatch('removeKeepFromVault', { removeVaultId: this.$route.params.id, keepId: keepId })
+                        swal({
+                            position: 'center',
+                            type: 'success',
+                            title: 'Your Keep has been deleted',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } 
+                    // else if (
+                    //     // Read more about handling dismissals
+                    //     result.dismiss === swal.DismissReason.cancel
+                    // ) {
+                    //     swal(
+                    //         'Cancelled',
+                    //         'Your image file is safe :)',
+                    //         'error'
+                    //     )
+                    // }
+                })
             },
             openImageModal(keep) {
                 this.$store.dispatch('setActiveKeep', keep)
-                $("#imageModal").modal('show')
+                $("#myModal").css({ display: "block" });
             },
             addKeepToVault(vaultId) {
                 var activeKeep = this.activeKeep
@@ -142,8 +194,19 @@
                     }
                     this.incrementCount()
                     this.$store.dispatch("addKeepToVault", addKeep)
+                    swal({
+                        position: 'top-end',
+                        type: 'success',
+                        title: 'Your Keep has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
-                return
+            },
+            incrementCount() {
+                var keep = this.$store.state.activeKeep
+                keep.saveCount++
+                this.$store.dispatch("updateKeep", keep)
             },
             setActiveKeep(keep) {
                 this.$store.dispatch('setActiveKeep', keep)
@@ -157,13 +220,23 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     .thumbnail {
-        background-color: rgba(87, 87, 87, 0.5);
+        background-color: rgb(44, 44, 44);
+        border: none
     }
-    i, p{color: white;}
+
+    i,
+    p {
+        color: white;
+    }
 
     .keeps {
         padding-top: 2rem;
 
+    }
+
+    .fa-code-fork {
+        margin-right: 15px;
+        margin-left: 15px;
     }
 
     img:hover {
@@ -181,7 +254,7 @@
     /* *********** COLUMN STYLING ********* */
 
     .row {
-        margin-top: 5rem;
+        margin-top: 1rem;
         display: -ms-flexbox;
         /* IE 10 */
         display: flex;
@@ -203,5 +276,38 @@
     .column img {
         margin-top: 8px;
         vertical-align: middle;
+    }
+
+    .vaultIn {
+        animation-name: slideIn, fadeIn;
+        animation-duration: 0.5s;
+    }
+
+    @keyframes slideIn {
+        0% {
+            transform: translateY(-3%);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @media(max-width:575px) {
+        .nav-content {
+            font-size: 17px;
+            margin-right: 10px;
+        }
+        .nav-logo {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
     }
 </style>

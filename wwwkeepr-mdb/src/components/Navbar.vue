@@ -33,15 +33,16 @@
                         <a href="#">
                             <i class="fa fa-sign-in"></i> Login</a>
                     </div>
-                    <div v-else="user._id" class="nav-logout pull-right nav-content">
+                    <div v-else="user._id" class="pull-right nav-content nav-logout">
                         <a href="#" @click="logout">
-                            <i class="fa fa-sign-out"></i> Logout</a>
+                            <i class="fa fa-sign-out fa-2x"></i>
+                        </a>
                     </div>
                     <div v-if="user._id" class="nav-create-keep pull-right nav-content" data-toggle="modal" data-target="#createKeep">
-                        <img src="../assets/add-keep.png" height="50" width="50" alt="">
+                        <img src="../assets/add-keep.png" height="40" width="40" alt="">
                     </div>
                     <div v-if="user._id" class="nav-create-vault pull-right nav-content" data-toggle="modal" data-target="#createVault">
-                        <img src="../assets/add-vault.png" height="40" width="40" alt="">
+                        <img src="../assets/add-vault.png" height="36" width="36" alt="">
                     </div>
                 </div>
             </nav>
@@ -182,10 +183,10 @@
             openCloudinary(str) {
                 cloudinary.openUploadWidget({ cloud_name: 'life-keepr', upload_preset: 'czqfqpq8' },
                     (error, result) => {
-                        if (str == 'v'){
-                        this.vault.imageUrl = result[0].secure_url
-                        }else{
-                        this.keep.imageUrl = result[0].secure_url
+                        if (str == 'v') {
+                            this.vault.imageUrl = result[0].secure_url
+                        } else {
+                            this.keep.imageUrl = result[0].secure_url
                         }
                     });
             },
@@ -227,7 +228,7 @@
         padding-top: 8px;
         margin-left: 15px;
         margin-right: 15px;
-        margin-bottom:10px;
+        margin-bottom: 10px;
     }
 
     .nav-bar {
@@ -240,13 +241,17 @@
         margin-right: 15px;
     }
 
+    .nav-logout {
+        padding-top: 20px
+    }
+
     .nav-create-keep {
-        padding-top: 10px;
+        padding-top: 14px;
         cursor: pointer;
     }
 
     .nav-create-vault {
-        padding-top: 16px;
+        padding-top: 19px;
         cursor: pointer
     }
 
@@ -270,7 +275,7 @@
             font-size: 17px;
             margin-right: 10px;
         }
-        .nav-logo{
+        .nav-logo {
             margin-left: 10px;
             margin-right: 10px;
         }
@@ -281,7 +286,7 @@
             font-size: 14px;
             margin-right: 6px;
         }
-        .nav-logo{
+        .nav-logo {
             margin-left: 6px;
             margin-right: 6px;
         }
@@ -292,19 +297,39 @@
             font-size: 12px;
             margin-right: 6px;
         }
-        .nav-logo{
+        .nav-logo {
             margin-left: 0px;
             margin-right: 4px;
         }
     }
+
     @media(max-width:390px) {
         .nav-content {
             font-size: 10px;
             margin-right: 4px;
         }
-        .nav-logo{
+        .nav-logo {
             margin-left: 0px;
             margin-right: 4px;
+        }
+    }
+
+    @media(max-width:300px) {
+        .nav-content {
+            font-size: 10px;
+            margin-right: 2px;
+        }
+        .nav-logo {
+            margin-left: 0px;
+            margin-right: 4px;
+        }
+        .nav-create-keep img {
+            height: 35px;
+            width: 35px;
+        }
+        .nav-create-vault img {
+            height: 31px;
+            width: 31px;
         }
     }
 
@@ -381,7 +406,8 @@
 
     /*********** VAULT MODAL **********/
 
-    .add-vault-image, .add-keep-image {
+    .add-vault-image,
+    .add-keep-image {
         height: 200px;
         width: auto;
         cursor: pointer;

@@ -1,5 +1,5 @@
 <template>
-    <div class="keeps">
+    <div class="keepsIn">
         <!-- <div class="create-keep">
             <h4 data-toggle="modal" data-target="#createKeep">
                 <i class="fa fa-picture-o fa-lg"></i> Create Keep
@@ -10,6 +10,7 @@
                     <i class="fa fa-picture-o fa-lg"></i> Create Keep
                 </h4>
             </div> -->
+        <h1 style="color:white;margin-bottom: 0">My Keeps</h1>
         <div class="row">
             <!-- ********** DRAW KEEPS ********** -->
             <div class="column">
@@ -105,6 +106,7 @@
 </template>
 
 <script>
+    import swal from "sweetalert2"
     import ImageModal from "./imagemodal"
     export default {
         name: 'Keeps',
@@ -139,6 +141,7 @@
         },
         mounted() {
             this.$store.dispatch('getUserKeeps')
+            this.$store.commit('setActiveVaultKeeps', [])
         },
         methods: {
             openImageModal(keep) {
@@ -159,8 +162,14 @@
                     }
                     this.incrementCount()
                     this.$store.dispatch("addKeepToVault", addKeep)
+                    swal({
+                        position: 'top-end',
+                        type: 'success',
+                        title: 'Your Keep has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
-                return
             },
             incrementCount() {
                 var keep = this.$store.state.activeKeep
@@ -189,21 +198,24 @@
                 }).then((result) => {
                     if (result.value) {
                         this.$store.dispatch('deleteKeep', keepId)
-                        swal(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        )
-                    } else if (
-                        // Read more about handling dismissals
-                        result.dismiss === swal.DismissReason.cancel
-                    ) {
-                        swal(
-                            'Cancelled',
-                            'Your image file is safe :)',
-                            'error'
-                        )
+                        swal({
+                            position: 'center',
+                            type: 'success',
+                            title: 'Your Keep has been deleted',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     }
+                    // else if (
+                    //     // Read more about handling dismissals
+                    //     result.dismiss === swal.DismissReason.cancel
+                    // ) {
+                    //     swal(
+                    //         'Cancelled',
+                    //         'Your image file is safe :)',
+                    //         'error'
+                    //     )
+                    // }
                 })
             }
         }
@@ -230,7 +242,8 @@
     }
 
     .thumbnail {
-        background-color: rgba(253, 253, 253, 0.215)
+        background-color: rgb(44, 44, 44);
+        border: none;
     }
 
     /* ********* END ********* */
@@ -263,6 +276,52 @@
     .fa-trash,
     .fa-eye {
         cursor: pointer;
+    }
+
+    .keepsIn {
+        animation-name: slideIn, fadeIn;
+        animation-duration: 0.4s;
+    }
+
+    @keyframes slideIn {
+        0% {
+            transform: translateY(-3%);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .keepsOut {
+        animation-name: slideOut, fadeOut;
+        animation-duration: 0.4s;
+    }
+
+    @keyframes slideOut {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-3%);
+        }
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
     }
 
     /* .keep-content:hover .overlay {

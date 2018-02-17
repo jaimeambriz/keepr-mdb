@@ -3,7 +3,7 @@
     <div class="row">
       <!-- ********** BEGIN DRAWING THUMBNAILS ********* -->
       <div class="column">
-        <div class="thumbnail animated zoomInDown" v-for="keep in keeps[0]">
+        <div class="thumbnail " v-for="keep in keeps[0]">
           <div v-scroll-reveal="{origin: 'bottom', distance: '300px',duration: 200, delay: 200}" class="scroll-reveal">
             <img :src="keep.imageUrl" :alt="keep.name" @click="openImageModal(keep)" style="width:100%">
             <div class="caption">
@@ -11,22 +11,22 @@
               <div class="buttons">
                 <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
                 <i v-if="user._id" class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
-                <i class="fa fa-share"></i> (coming soon)
+                <i class="fa fa-share"></i>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="column">
-        <div class="thumbnail animated zoomInDown" v-for="keep in keeps[1]">
+        <div class="thumbnail " v-for="keep in keeps[1]">
           <div v-scroll-reveal="{origin: 'bottom',  distance: '300px',duration: 200, delay: 200}" class="scroll-reveal">
-            <img :src="keep.imageUrl" :alt="keep.name"  @click="openImageModal(keep)" style="width:100%">
+            <img :src="keep.imageUrl" :alt="keep.name" @click="openImageModal(keep)" style="width:100%">
             <div class="caption">
               <p>{{keep.name}}</p>
               <div class="buttons">
                 <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
                 <i v-if="user._id" class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
-                <i class="fa fa-share"></i> (coming soon)
+                <i class="fa fa-share"></i>
               </div>
             </div>
           </div>
@@ -42,30 +42,30 @@
         </div>
       </div>
       <div v-if="keeps.length > 2" class="column">
-        <div class="thumbnail animated zoomInDown" v-for="keep in keeps[2]">
+        <div class="thumbnail " v-for="keep in keeps[2]">
           <div v-scroll-reveal="{origin: 'bottom',  distance: '300px',duration: 200, delay: 300}" class="scroll-reveal">
-            <img :src="keep.imageUrl" :alt="keep.name"  @click="openImageModal(keep)" style="width:100%">
+            <img :src="keep.imageUrl" :alt="keep.name" @click="openImageModal(keep)" style="width:100%">
             <div class="caption">
               <p>{{keep.name}}</p>
               <div class="buttons">
                 <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
                 <i v-if="user._id" class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
-                <i class="fa fa-share"></i> (coming soon)
+                <i class="fa fa-share"></i>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div v-if="keeps.length > 2" class="column">
-        <div class="thumbnail animated zoomInDown" v-for="keep in keeps[3]">
+        <div class="thumbnail " v-for="keep in keeps[3]">
           <div v-scroll-reveal="{origin: 'bottom',  distance: '300px',duration: 200, delay: 400}" class="scroll-reveal">
-            <img :src="keep.imageUrl" :alt="keep.name"  @click="openImageModal(keep)" style="width:100%">
+            <img :src="keep.imageUrl" :alt="keep.name" @click="openImageModal(keep)" style="width:100%">
             <div class="caption">
               <p>{{keep.name}}</p>
               <div class="buttons">
                 <i class="fa fa-eye" @click="openImageModal(keep)">{{keep.views}}</i>
                 <i v-if="user._id" class="fa fa-code-fork" @click="setActiveKeep(keep)">{{keep.saveCount}}</i>
-                <i class="fa fa-share"></i> (coming soon)
+                <i class="fa fa-share"></i>
               </div>
             </div>
           </div>
@@ -114,6 +114,7 @@
 </template>
 
 <script>
+  import swal from "sweetalert2"
   // import ScrollReveal from 'scrollreveal'
   // window.sr = ScrollReveal();
   // sr.flag   = true;
@@ -137,7 +138,7 @@
         },
       }
     }, mounted() {
-      // this.$store.dispatch('getAllKeeps')
+      this.$store.commit('setActiveVaultKeeps', [])
     },
     components: {
       Login,
@@ -184,8 +185,14 @@
           }
           this.incrementCount()
           this.$store.dispatch("addKeepToVault", addKeep)
+          swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Your Keep has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
-        return
       },
       setActiveKeep(keep) {
         this.$store.dispatch('setActiveKeep', keep)
@@ -248,7 +255,6 @@
   }
 
   /* *********** END HOVER ********** */
-
 
   .row {
     display: -ms-flexbox;
