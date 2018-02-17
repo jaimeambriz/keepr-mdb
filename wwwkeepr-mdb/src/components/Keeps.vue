@@ -163,7 +163,7 @@
                     this.incrementCount()
                     this.$store.dispatch("addKeepToVault", addKeep)
                     swal({
-                        position: 'top-end',
+                        position: 'center',
                         type: 'success',
                         title: 'Your Keep has been saved',
                         showConfirmButton: false,
