@@ -300,14 +300,4 @@
             opacity: 1;
         }
     }
-    @media(max-width:575px) {
-        .nav-content {
-            font-size: 17px;
-            margin-right: 10px;
-        }
-        .nav-logo {
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-    }
 </style>

@@ -9,7 +9,7 @@
         <div class="row" v-for="vault in vaults">
             <!-- DRAW THE VAULTS -->
 
-            <div class="vault-image img-responsive col-xs-3">
+            <div class="vault-image img-responsive col-xs-4">
                 <router-link :to="'/vaults/'+vault._id">
                     <img :src="vault.imageUrl" class="pull-left" alt="image" style="width:100%">
                 </router-link>
