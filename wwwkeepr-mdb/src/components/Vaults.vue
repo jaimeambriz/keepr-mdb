@@ -14,12 +14,12 @@
                     <img :src="vault.imageUrl" class="pull-left" alt="image" style="width:100%">
                 </router-link>
             </div>
-            <div class="vault-caption col-xs-6" >
+            <div class="vault-caption col-xs-5" >
                 <router-link :to="'/vaults/'+vault._id">
                     <h1>{{vault.name}}</h1>
                 </router-link>
             </div>
-            <div class="vault-delete col-xs-3">
+            <div class="vault-delete col-xs-4">
                 <i class="vault-trash fa fa-trash fa-3x" @click="deleteVault(vault._id)" ></i>
                 <router-link :to="'/vaults/'+vault._id">
                     <i class="vault-arrow fa fa-angle-right fa-4x"></i>
