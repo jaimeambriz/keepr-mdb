@@ -15,7 +15,7 @@
             <!-- ********** DRAW KEEPS ********** -->
             <div class="column">
                 <div class="thumbnail" data-scroll-reveal="enter left and move 50px over 1.33s" v-for="keep in keeps[0]">
-                    <img :src="keep.imageUrl" alt="image" @click="openImageModal(keep)" style="width:100%">
+                    <img :src="keep.imageUrl" alt="image" @click="openImageModal(keep)" style="width:100%" :id="keep._id">
                     <div class="caption">
                         <p>{{keep.name}}</p>
                         <div class="buttons">
@@ -28,7 +28,7 @@
             </div>
             <div class="column">
                 <div class="thumbnail" v-for="keep in keeps[1]">
-                    <img :src="keep.imageUrl" alt="image" @click="openImageModal(keep)" style="width:100%">
+                    <img :src="keep.imageUrl" alt="image" @click="openImageModal(keep)" style="width:100%" :id="keep._id">
                     <div class="caption">
                         <p>{{keep.name}}</p>
                         <div class="buttons">
@@ -41,7 +41,7 @@
             </div>
             <div v-if="keeps.length > 2" class="column">
                 <div class="thumbnail" v-for="keep in keeps[2]">
-                    <img :src="keep.imageUrl" alt="image" @click="openImageModal(keep)" style="width:100%">
+                    <img :src="keep.imageUrl" alt="image" @click="openImageModal(keep)" style="width:100%" :id="keep._id">
                     <div class="caption">
                         <p>{{keep.name}}</p>
                         <div class="buttons">
@@ -54,7 +54,7 @@
             </div>
             <div v-if="keeps.length > 2" class="column">
                 <div class="thumbnail" v-for="keep in keeps[3]">
-                    <img :src="keep.imageUrl" alt="image" @click="openImageModal(keep)" style="width:100%">
+                    <img :src="keep.imageUrl" alt="image" @click="openImageModal(keep)" style="width:100%" :id="keep._id">
                     <div class="caption">
                         <p>{{keep.name}}</p>
                         <div class="buttons">
@@ -145,6 +145,26 @@
         },
         methods: {
             openImageModal(keep) {
+                var window = this.$store.state.windowWidth
+                var img = document.getElementById(keep._id);
+                //or however you get a handle to the IMG
+                var width = img.clientWidth;
+                var height = img.clientHeight;
+                if (window > 800) {
+                    if (height > width) {
+                        $("#img01").css({ height: "89%" });
+                    }
+                    else {
+                        $("#img01").css({ width: "80%" });
+                    }
+                } else {
+                    if (height > width) {
+                        $("#img01").css({ height: "88%" });
+                    }
+                    else {
+                        $("#img01").css({ width: "90%" });
+                    }
+                }
                 this.$store.dispatch('setActiveKeep', keep)
                 $("#myModal").css({ display: "block" });
                 this.incrementViews(keep)

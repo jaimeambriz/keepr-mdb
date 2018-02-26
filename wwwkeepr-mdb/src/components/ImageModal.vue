@@ -39,7 +39,9 @@
             // When the user clicks on <span> (x), close the modal
             close() {
                 $("#myModal").css({ display: "none" })
-                this.$store.dispatch('setActiveKeep',{})
+                $("#img01").css({height: ""});
+                $("#img01").css({width: ""});
+                this.$store.dispatch('setActiveKeep', {})
 
             }
         }
@@ -47,6 +49,7 @@
 </script>
 <style scoped>
     /* ********** CSS FOR MODAL ********** */
+
     /* Style the Image Used to Trigger the Modal */
 
     #myImg {
@@ -89,7 +92,8 @@
     .modal-content {
         margin: auto;
         display: block;
-        width: 80%;
+        max-width: 80%; 
+        max-height: 89%;
     }
 
     /* Caption of Modal Image (Image Text) - Same Width as the Image */
@@ -153,7 +157,8 @@
 
     @media only screen and (max-width: 800px) {
         .modal-content {
-            width: 90%;
+            max-width: 90%;
+            max-height: 88%;
         }
     }
 </style>

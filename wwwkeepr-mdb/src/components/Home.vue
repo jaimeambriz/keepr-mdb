@@ -5,7 +5,7 @@
       <div class="column">
         <div class="thumbnail " v-for="keep in keeps[0]">
           <div v-scroll-reveal="{origin: 'bottom', distance: '300px',duration: 200, delay: 200}" class="scroll-reveal">
-            <img :src="keep.imageUrl" :alt="keep.name" @click="openImageModal(keep)" style="width:100%">
+            <img :src="keep.imageUrl" :alt="keep.name" @click="openImageModal(keep)" style="width:100%" :id="keep._id">
             <div class="caption">
               <p>{{keep.name}}</p>
               <div class="buttons">
@@ -20,7 +20,7 @@
       <div class="column">
         <div class="thumbnail " v-for="keep in keeps[1]">
           <div v-scroll-reveal="{origin: 'bottom',  distance: '300px',duration: 200, delay: 200}" class="scroll-reveal">
-            <img :src="keep.imageUrl" :alt="keep.name" @click="openImageModal(keep)" style="width:100%">
+            <img :src="keep.imageUrl" :alt="keep.name" @click="openImageModal(keep)" style="width:100%" :id="keep._id">
             <div class="caption">
               <p>{{keep.name}}</p>
               <div class="buttons">
@@ -44,7 +44,7 @@
       <div v-if="keeps.length > 2" class="column">
         <div class="thumbnail " v-for="keep in keeps[2]">
           <div v-scroll-reveal="{origin: 'bottom',  distance: '300px',duration: 200, delay: 300}" class="scroll-reveal">
-            <img :src="keep.imageUrl" :alt="keep.name" @click="openImageModal(keep)" style="width:100%">
+            <img :src="keep.imageUrl" :alt="keep.name" @click="openImageModal(keep)" style="width:100%" :id="keep._id">
             <div class="caption">
               <p>{{keep.name}}</p>
               <div class="buttons">
@@ -58,7 +58,7 @@
       </div>
       <div v-if="keeps.length > 2" class="column">
         <div class="thumbnail " v-for="keep in keeps[3]">
-          <div v-scroll-reveal="{origin: 'bottom',  distance: '300px',duration: 200, delay: 400}" class="scroll-reveal">
+          <div v-scroll-reveal="{origin: 'bottom',  distance: '300px',duration: 200, delay: 400}" class="scroll-reveal" :id="keep._id">
             <img :src="keep.imageUrl" :alt="keep.name" @click="openImageModal(keep)" style="width:100%">
             <div class="caption">
               <p>{{keep.name}}</p>
@@ -89,7 +89,7 @@
             Add Keep
           </h4>
           <h6>{{activeKeep.name}}</h6>
-          <img :src="activeKeep.imageUrl" alt="" style="height:100px; width:auto;">
+          <img :src="activeKeep.imageUrl" alt="activeKeep.name" style="height:100px; width:auto;">
           <!-- *********** Modal Body *********** -->
           <div class="modal-body">
             <form class="form">
@@ -168,6 +168,26 @@
     },
     methods: {
       openImageModal(keep) {
+        var window = this.$store.state.windowWidth
+        var img = document.getElementById(keep._id);
+        //or however you get a handle to the IMG
+        var width = img.clientWidth;
+        var height = img.clientHeight;
+        if (window > 800){
+          if(height > width){
+            $("#img01").css({height: "89%"});
+          }
+          else{
+            $("#img01").css({width: "80%"});
+          }
+        }else{
+          if(height > width){
+            $("#img01").css({height: "88%"});
+          }
+          else{
+            $("#img01").css({width: "90%"});
+          }
+        }
         this.$store.dispatch('setActiveKeep', keep)
         $("#myModal").css({ display: "block" });
         this.incrementViews(keep)
@@ -315,8 +335,8 @@
   @media (max-width: 420px) {
     .column {
       -ms-flex: 100%;
-    /* IE 10 */
-    flex: 100%;
+      /* IE 10 */
+      flex: 100%;
     }
   }
 </style>
