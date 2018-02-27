@@ -152,21 +152,22 @@
                 var height = img.clientHeight;
                 if (window > 800) {
                     if (height > width) {
-                        $("#img01").css({ height: "89%" });
+                        $("#img01").css({ height: "98%" });
                     }
                     else {
-                        $("#img01").css({ width: "80%" });
+                        $("#img01").css({ width: "98%" });
                     }
                 } else {
+                    // ******** THIS IS FOR MOBILE *******
                     if (height > width) {
-                        $("#img01").css({ height: "88%" });
+                        $("#img01").css({ height: "98%" });
                     }
                     else {
-                        $("#img01").css({ width: "90%" });
+                        $("#img01").css({ width: "98%" });
                     }
                 }
                 this.$store.dispatch('setActiveKeep', keep)
-                $("#myModal").css({ display: "block" });
+                $("#myModal").css({ display: "flex" });
                 this.incrementViews(keep)
             },
             incrementViews(keep) {

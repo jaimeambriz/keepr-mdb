@@ -8,8 +8,9 @@
                   <span aria-hidden="true">&times;</span>
                   <span class="sr-only">Close</span>
                 </button>
+                <img class="keepr-logo" src="../assets/Keepr-logo.png" alt="Letter K">
                 <h4 class="modal-title">
-                  Register
+                  Create a Keepr account
                 </h4>
               </div>
               <!-- *********** Modal Body *********** -->
@@ -35,7 +36,7 @@
                       </div>
                   </div>
                   <div class="form-group">
-                      <button @click="submitRegister" data-dismiss="modal" class="btn btn-default">Submit</button>
+                      <button @click="submitRegister" data-dismiss="modal" class="btn btn-default btn-primary">Submit</button>
                   </div>
                 </form>
               </div>
@@ -87,8 +88,15 @@
       </script>
       
       <style scoped>
+        .keepr-logo{
+          width:15%;
+        }
         .modal{
           margin-top: 5%
+        }
+        .modal-content{
+          background-color: #F2F7F9;
+          border: 6px #4caf50 solid
         }
         .modal-body .form-horizontal .col-sm-2,
         .modal-body .form-horizontal .col-sm-10 {

@@ -5,15 +5,17 @@
         <div id="myModal" class="modal">
 
             <!-- The Close Button -->
-            <span @click="close" class="close">&times;</span>
+        
+                <!-- <span  class="close">&times;</span> -->
+    
+                <!-- Modal Content (The Image) -->
+                <img class="modal-content" :src="activeKeep.imageUrl" @click="close" id="img01">
 
-            <!-- Modal Content (The Image) -->
-            <img class="modal-content" :src="activeKeep.imageUrl" id="img01">
 
             <!-- Modal Caption (Image Text) -->
-            <div id="caption">
+            <!-- <div id="caption">
                 <h1>{{activeKeep.name}}</h1>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -66,12 +68,15 @@
 
     .modal {
         display: none;
+        justify-content: center;
+        align-items: center;
+
         /* Hidden by default */
         position: fixed;
         /* Stay in place */
         z-index: 2;
         /* Sit on top */
-        padding-top: 50px;
+        /* padding-top: 50px; */
         /* Location of the box */
         left: 0;
         top: 0;
@@ -92,8 +97,9 @@
     .modal-content {
         margin: auto;
         display: block;
-        max-width: 80%; 
-        max-height: 89%;
+        max-width: 98%; 
+        max-height: 98%;
+        cursor: pointer;
     }
 
     /* Caption of Modal Image (Image Text) - Same Width as the Image */
@@ -131,15 +137,16 @@
         position: absolute;
         top: 15px;
         right: 35px;
-        color: #f1f1f1;
+        color: #000000;
         font-size: 40px;
         font-weight: bold;
         transition: 0.3s;
+        z-index: 3;
     }
 
     .close:hover,
     .close:focus {
-        color: #bbb;
+        color: rgb(0, 0, 0);
         text-decoration: none;
         cursor: pointer;
     }
@@ -157,8 +164,8 @@
 
     @media only screen and (max-width: 800px) {
         .modal-content {
-            max-width: 90%;
-            max-height: 88%;
+            max-width: 98%;
+            max-height: 98%;
         }
     }
 </style>

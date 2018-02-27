@@ -8,6 +8,7 @@
                   <span aria-hidden="true">&times;</span>
                   <span class="sr-only">Close</span>
                 </button>
+                <img class="keepr-logo" src="../assets/Keepr-logo.png" alt="Letter K">
                 <h4 class="modal-title">
                   User Login
                 </h4>
@@ -31,7 +32,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <button @click="submitLogin" data-dismiss="modal" class="btn btn-default"> Login</button>
+                    <button @click="submitLogin" data-dismiss="modal" class="btn btn-default btn-primary"> Login</button>
                   </div>
                 </form>
               </div>
@@ -74,10 +75,18 @@
       </script>
       
       <style scoped>
+        .keepr-logo{
+          padding-left:10px;
+          width:15%;
+        }
         .modal {
           margin-top: 5%
         }
-      
+        .modal-content{
+          background-color: #F2F7F9;
+          /* border: 6px #ff9900 solid; */
+          border: 6px #3379b7 solid
+        }
         .modal-body .form-horizontal .col-sm-2,
         .modal-body .form-horizontal .col-sm-10 {
           width: 100%
