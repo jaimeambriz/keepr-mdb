@@ -5,11 +5,11 @@
         <div id="myModal" class="modal">
 
             <!-- The Close Button -->
-        
-                <!-- <span  class="close">&times;</span> -->
-    
-                <!-- Modal Content (The Image) -->
-                <img class="modal-content" :src="activeKeep.imageUrl" @click="close" id="img01">
+
+            <!-- <span  class="close">&times;</span> -->
+
+            <!-- Modal Content (The Image) -->
+            <img class="modal-content" :src="activeKeep.imageUrl" @click="close" id="img01">
 
 
             <!-- Modal Caption (Image Text) -->
@@ -40,29 +40,22 @@
         methods: {
             // When the user clicks on <span> (x), close the modal
             close() {
-                $("#myModal").css({ display: "none" })
-                $("#img01").css({height: ""});
-                $("#img01").css({width: ""});
-                this.$store.dispatch('setActiveKeep', {})
-
+                $("#myModal").addClass('exit')
+                $("#img01").css({ height: "" });
+                $("#img01").css({ width: "" });
+                setTimeout(function () {
+                    $("#myModal").css({ display: "none" }),
+                        $("#myModal").removeClass('exit');
+                }, 500)
+            },
+            removeKeep() {
+                this.$store.dispatch('setActiveKeep', {})  
             }
         }
     }
 </script>
 <style scoped>
     /* ********** CSS FOR MODAL ********** */
-
-    /* Style the Image Used to Trigger the Modal */
-
-    #myImg {
-        border-radius: 5px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    #myImg:hover {
-        opacity: 0.7;
-    }
 
     /* The Modal (background) */
 
@@ -97,9 +90,9 @@
     .modal-content {
         margin: auto;
         display: block;
-        max-width: 98%; 
+        max-width: 98%;
         max-height: 98%;
-        cursor: pointer;
+        cursor: zoom-out;
     }
 
     /* Caption of Modal Image (Image Text) - Same Width as the Image */
@@ -118,8 +111,8 @@
 
     .modal-content,
     #caption {
-        animation-name: zoom;
-        animation-duration: 0.6s;
+        animation: zoom;
+        animation-duration: 0.7s;
     }
 
     @keyframes zoom {
@@ -128,6 +121,20 @@
         }
         to {
             transform: scale(1)
+        }
+    }
+
+    .exit {
+        animation: zoomout;
+        animation-duration: .6s;
+    }
+
+    @keyframes zoomout {
+        from {
+            transform: scale(1)
+        }
+        to {
+            transform: scale(0)
         }
     }
 

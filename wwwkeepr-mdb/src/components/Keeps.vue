@@ -292,7 +292,6 @@
         margin-left: 15px;
     }
 
-    img,
     .fa-code-fork,
     .fa-trash,
     .fa-eye {
@@ -385,6 +384,7 @@
 
     img {
         border-radius: 10px;
+        cursor:zoom-in
     }
 
     .row {

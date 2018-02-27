@@ -270,6 +270,7 @@
 
     img {
         border-radius: 10px;
+        cursor:zoom-in
     }
 
     /* *********** COLUMN STYLING ********* */

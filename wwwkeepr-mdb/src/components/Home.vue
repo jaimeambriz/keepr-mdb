@@ -168,6 +168,7 @@
     },
     methods: {
       openImageModal(keep) {
+        this.$store.dispatch('setActiveKeep', keep)
         var window = this.$store.state.windowWidth
         var img = document.getElementById(keep._id);
         //or however you get a handle to the IMG
@@ -189,7 +190,6 @@
             $("#img01").css({width: "98%"});
           }
         }
-        this.$store.dispatch('setActiveKeep', keep)
         $("#myModal").css({ display: "flex" });
         this.incrementViews(keep)
       },
@@ -308,9 +308,9 @@
 
   img {
     border-radius: 10px;
+    cursor:zoom-in
   }
 
-  img,
   .fa-code-fork,
   .fa-share,
   .fa-eye {
