@@ -74,6 +74,9 @@ var store = new vuex.Store({
                 .then(res => {
                     commit('setUser', res.data.data)
                     // console.log('Login: ', res)
+                    dispatch('getAllKeeps')
+                    dispatch('getVaults')
+                    dispatch('getUserKeeps')
                 })
                 .catch(err => {
                     // console.log('Error: ', err)
@@ -84,6 +87,9 @@ var store = new vuex.Store({
                 .then(res => {
                     // console.log('Register: ', res)
                     commit('setUser', res.data.data)
+                    dispatch('getAllKeeps')
+                    dispatch('getVaults')
+                    dispatch('getUserKeeps')
                 })
                 .catch(err => {
                     // console.log('Error: ', err)
@@ -172,8 +178,8 @@ var store = new vuex.Store({
             for (var i = 0; i < vaults.length; i++) {
                 var vault = vaults[i]
                 if (vault._id == payload) {
-                     activeVault = vault
-                     break;
+                    activeVault = vault
+                    break;
                 }
             }
             commit('setActiveVault', activeVault)

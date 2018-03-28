@@ -81,7 +81,7 @@
                         <img :src="activeKeep.imageUrl" alt="" style="height:100px; width:auto;">
                         <!-- *********** Modal Body *********** -->
                         <div class="modal-body">
-                            <form class="form">
+                            <<form v-if="vaults.length > 0 "class="form">
                                 <div class="form-group">
                                     <div class="col-sm-12 dropdown-style" title="choose category">
                                         <label for="vault options">Select Vault</label>
@@ -95,6 +95,7 @@
                                     <button @click="addKeepToVault(addKeep)" data-dismiss="modal">Submit</button>
                                 </div>
                             </form>
+                            <h3 v-else > Please creat a vault to save keep!</h3>
                         </div>
                     </div>
                 </div>
